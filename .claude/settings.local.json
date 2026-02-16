@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.erc.edu)",
+      "Bash(pip3 list:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

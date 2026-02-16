@@ -1,0 +1,28 @@
+# Connect IQ Build artifacts
+bin/
+*.prg
+*.iq
+
+# Developer keys (keep these private!)
+developer_key.der
+developer_key.pem
+
+# IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Logs
+*.log
+
+# Simulator data
+.metadata/

@@ -1,0 +1,9 @@
+# Monkey Jungle Configuration
+# This file defines the project structure for the Connect IQ compiler
+
+# Base project definition
+project.manifest = manifest.xml
+
+# Source files
+base.sourcePath = source
+base.resourcePath = resources
