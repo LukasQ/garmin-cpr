@@ -209,7 +209,7 @@ garmin-cpr/
     ├── INSTALLATION.md          # Dev & installation guide
     ├── PUBLISHING.md            # Publishing guide
     ├── DEPTH_SENSOR.md          # Sensor documentation
-    ├── ICON_GUIDE.md            # Icon design guide
+    ├── ICON_SPECS.md            # Icon design specifications
     ├── CI_CD_GUIDE.md           # CI/CD guide
     └── REFERENCES.bib           # Sources (BibTeX)
 ```

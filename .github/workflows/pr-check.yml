@@ -184,13 +184,13 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/connectiq-sdk
-        key: ${{ runner.os }}-connectiq-sdk-7.2.1
+        key: ${{ runner.os }}-connectiq-sdk-8.4.1
 
     - name: Download Connect IQ SDK
       run: |
         mkdir -p ~/connectiq-sdk
         cd ~/connectiq-sdk
-        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip -O sdk.zip
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1.zip -O sdk.zip
         unzip -q sdk.zip
         rm sdk.zip
         chmod +x bin/monkeyc
