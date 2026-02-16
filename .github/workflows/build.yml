@@ -1,0 +1,206 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    name: Build Connect IQ App
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up environment
+      run: |
+        echo "Setting up build environment..."
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+
+    - name: Cache Connect IQ SDK
+      id: cache-sdk
+      uses: actions/cache@v3
+      with:
+        path: ~/connectiq-sdk
+        key: ${{ runner.os }}-connectiq-sdk-7.2.1
+
+    - name: Download and install Connect IQ SDK
+      if: steps.cache-sdk.outputs.cache-hit != 'true'
+      run: |
+        echo "Downloading Connect IQ SDK..."
+        mkdir -p ~/connectiq-sdk
+        cd ~/connectiq-sdk
+        # Download SDK (update URL to latest version)
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip -O sdk.zip
+        unzip -q sdk.zip
+        rm sdk.zip
+        chmod +x bin/monkeyc bin/monkeydo
+        echo "SDK installed successfully"
+
+    - name: Add SDK to PATH
+      run: |
+        echo "$HOME/connectiq-sdk/bin" >> $GITHUB_PATH
+        export PATH="$HOME/connectiq-sdk/bin:$PATH"
+
+    - name: Generate developer key
+      run: |
+        echo "Generating developer key..."
+        openssl genrsa -out developer_key.pem 4096 2>/dev/null
+        openssl pkcs8 -topk8 -inform PEM -outform DER \
+          -in developer_key.pem -out developer_key.der -nocrypt
+        echo "Developer key generated"
+
+    - name: Verify project structure
+      run: |
+        echo "Verifying project structure..."
+        ls -la
+        test -f manifest.xml || (echo "manifest.xml not found!" && exit 1)
+        test -f monkey.jungle || (echo "monkey.jungle not found!" && exit 1)
+        test -d source || (echo "source directory not found!" && exit 1)
+        echo "Project structure OK"
+
+    - name: Build for Fenix 7
+      run: |
+        echo "Building for Fenix 7..."
+        mkdir -p bin
+        ~/connectiq-sdk/bin/monkeyc \
+          -o bin/CPRTrainer-fenix7.prg \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -d fenix7 \
+          -w
+        echo "Build successful!"
+
+    - name: Build for Venu 2
+      run: |
+        echo "Building for Venu 2..."
+        ~/connectiq-sdk/bin/monkeyc \
+          -o bin/CPRTrainer-venu2.prg \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -d venu2 \
+          -w
+        echo "Build successful!"
+
+    - name: Build for Forerunner 955
+      run: |
+        echo "Building for Forerunner 955..."
+        ~/connectiq-sdk/bin/monkeyc \
+          -o bin/CPRTrainer-fr955.prg \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -d forerunner955 \
+          -w
+        echo "Build successful!"
+
+    - name: List build artifacts
+      run: |
+        echo "Build artifacts:"
+        ls -lh bin/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: cpr-trainer-builds
+        path: bin/*.prg
+        retention-days: 30
+
+    - name: Build summary
+      run: |
+        echo "### Build Summary :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **Build successful for all devices!**" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Built for:" >> $GITHUB_STEP_SUMMARY
+        echo "- Fenix 7" >> $GITHUB_STEP_SUMMARY
+        echo "- Venu 2" >> $GITHUB_STEP_SUMMARY
+        echo "- Forerunner 955" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Artifacts available for download in the Actions tab." >> $GITHUB_STEP_SUMMARY
+
+  lint:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check for TODO comments
+      run: |
+        echo "Checking for TODO comments..."
+        if grep -r "TODO\|FIXME\|XXX\|HACK" source/ --color=always; then
+          echo "⚠️ Found TODO/FIXME comments - consider addressing them"
+        else
+          echo "✅ No TODO/FIXME comments found"
+        fi
+
+    - name: Check file permissions
+      run: |
+        echo "Checking file permissions..."
+        find source/ -type f -name "*.mc" -executable && \
+          echo "⚠️ Found executable source files - they should not be executable" || \
+          echo "✅ File permissions OK"
+
+    - name: Validate manifest.xml
+      run: |
+        echo "Validating manifest.xml..."
+        if command -v xmllint &> /dev/null; then
+          xmllint --noout manifest.xml && echo "✅ manifest.xml is valid" || exit 1
+        else
+          echo "⚠️ xmllint not available, skipping validation"
+        fi
+
+    - name: Check for sensitive data
+      run: |
+        echo "Checking for sensitive data..."
+        if grep -r -i "password\|secret\|apikey\|api_key" source/ resources/ --exclude-dir=.git; then
+          echo "⚠️ Potential sensitive data found!"
+          exit 1
+        else
+          echo "✅ No sensitive data found"
+        fi
+
+  documentation:
+    name: Documentation Checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check README exists
+      run: |
+        test -f README.md || (echo "❌ README.md not found!" && exit 1)
+        echo "✅ README.md exists"
+
+    - name: Check DISCLAIMER exists
+      run: |
+        test -f DISCLAIMER.md || (echo "❌ DISCLAIMER.md not found!" && exit 1)
+        echo "✅ DISCLAIMER.md exists"
+
+    - name: Check LICENSE exists
+      run: |
+        test -f LICENSE || (echo "❌ LICENSE not found!" && exit 1)
+        echo "✅ LICENSE exists"
+
+    - name: Check for broken links in README
+      run: |
+        echo "Checking for broken internal links..."
+        # Check if linked files exist
+        for file in INSTALLATION.md PUBLISHING.md DISCLAIMER.md DEPTH_SENSOR.md ICON_GUIDE.md REFERENCES.bib; do
+          if grep -q "$file" README.md; then
+            test -f "$file" && echo "✅ $file exists" || (echo "❌ $file referenced but not found!" && exit 1)
+          fi
+        done
+
+    - name: Check documentation size
+      run: |
+        echo "Documentation statistics:"
+        wc -l *.md | sort -n
+        echo ""
+        echo "Total documentation lines: $(cat *.md | wc -l)"

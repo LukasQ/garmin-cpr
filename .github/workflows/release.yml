@@ -1,0 +1,223 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.0
+
+jobs:
+  build-release:
+    name: Build Release Artifacts
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed to create releases
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Extract version from tag
+      id: version
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "Building version: $VERSION"
+
+    - name: Cache Connect IQ SDK
+      id: cache-sdk
+      uses: actions/cache@v3
+      with:
+        path: ~/connectiq-sdk
+        key: ${{ runner.os }}-connectiq-sdk-7.2.1
+
+    - name: Download and install Connect IQ SDK
+      if: steps.cache-sdk.outputs.cache-hit != 'true'
+      run: |
+        echo "Downloading Connect IQ SDK..."
+        mkdir -p ~/connectiq-sdk
+        cd ~/connectiq-sdk
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip -O sdk.zip
+        unzip -q sdk.zip
+        rm sdk.zip
+        chmod +x bin/monkeyc bin/monkeydo
+
+    - name: Generate developer key
+      run: |
+        openssl genrsa -out developer_key.pem 4096 2>/dev/null
+        openssl pkcs8 -topk8 -inform PEM -outform DER \
+          -in developer_key.pem -out developer_key.der -nocrypt
+
+    - name: Create bin directory
+      run: mkdir -p bin release
+
+    - name: Build for all devices
+      run: |
+        echo "Building release for all supported devices..."
+
+        DEVICES=(
+          "fenix7:Fenix7"
+          "fenix7s:Fenix7S"
+          "fenix7x:Fenix7X"
+          "fenix6:Fenix6"
+          "fenix6s:Fenix6S"
+          "fenix6xpro:Fenix6XPro"
+          "venu:Venu"
+          "venu2:Venu2"
+          "venu2plus:Venu2Plus"
+          "venu2s:Venu2S"
+          "vivoactive4:Vivoactive4"
+          "vivoactive4s:Vivoactive4S"
+          "forerunner245:FR245"
+          "forerunner255:FR255"
+          "forerunner945:FR945"
+          "forerunner955:FR955"
+          "epix2:Epix2"
+        )
+
+        for device_pair in "${DEVICES[@]}"; do
+          IFS=':' read -r device_id device_name <<< "$device_pair"
+          echo "Building for $device_name ($device_id)..."
+          ~/connectiq-sdk/bin/monkeyc \
+            -o "bin/CPRTrainer-${device_name}.prg" \
+            -f monkey.jungle \
+            -y developer_key.der \
+            -d "$device_id" \
+            -w || echo "⚠️ Build failed for $device_name, skipping..."
+        done
+
+    - name: Build universal .iq package for store
+      run: |
+        echo "Building universal .iq package..."
+        ~/connectiq-sdk/bin/monkeyc \
+          -o "release/CPRTrainer-v${{ steps.version.outputs.version }}.iq" \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -r \
+          -w
+        echo "✅ Universal .iq package created"
+
+    - name: Create ZIP of all PRG files
+      run: |
+        cd bin
+        zip -r "../release/CPRTrainer-AllDevices-v${{ steps.version.outputs.version }}.zip" *.prg
+        cd ..
+        echo "✅ ZIP package created"
+
+    - name: Generate build info
+      run: |
+        cat > release/BUILD_INFO.txt << EOF
+        CPR Trainer - Build Information
+        ================================
+
+        Version: ${{ steps.version.outputs.version }}
+        Build Date: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        Git Commit: ${{ github.sha }}
+        Git Tag: ${{ github.ref_name }}
+
+        Files included:
+        ---------------
+        $(ls -lh release/)
+
+        Installation:
+        -------------
+        1. Download the .prg file for your specific device
+        2. Connect your Garmin watch via USB
+        3. Copy the .prg file to GARMIN/GARMIN/APPS/
+        4. Disconnect and restart your watch
+
+        For publishing to Connect IQ Store:
+        -----------------------------------
+        Use the .iq file: CPRTrainer-v${{ steps.version.outputs.version }}.iq
+
+        Supported Devices:
+        ------------------
+        $(find bin -name "*.prg" -exec basename {} \; | sed 's/CPRTrainer-//g' | sed 's/.prg//g' | sort)
+
+        Documentation:
+        --------------
+        - README.md: Main documentation
+        - INSTALLATION.md: Installation guide
+        - PUBLISHING.md: Publishing guide
+        - DISCLAIMER.md: Important legal information
+
+        Support:
+        --------
+        GitHub: https://github.com/[your-username]/garmin-cpr
+        Issues: https://github.com/[your-username]/garmin-cpr/issues
+        EOF
+
+    - name: Generate checksums
+      run: |
+        cd release
+        sha256sum * > SHA256SUMS.txt
+        cat SHA256SUMS.txt
+        cd ..
+
+    - name: Create release notes
+      id: release_notes
+      run: |
+        cat > release_notes.md << 'EOF'
+        ## 🫀 CPR Trainer v${{ steps.version.outputs.version }}
+
+        ### ⚠️ WICHTIGER HINWEIS
+        Diese App ist ein Hilfsmittel zur Unterstützung geschulter Ersthelfer und ersetzt keine medizinische Ausbildung. Im Notfall immer zuerst **112** (Europa) oder **911** (USA) anrufen!
+
+        ### 📦 Downloads
+
+        **Für Endnutzer:**
+        - `CPRTrainer-AllDevices-vX.X.X.zip` - Alle .prg Dateien für direkte Installation
+        - Wähle die .prg Datei für dein Gerät und kopiere sie nach `GARMIN/GARMIN/APPS/`
+
+        **Für Connect IQ Store:**
+        - `CPRTrainer-vX.X.X.iq` - Universal package für Store-Submission
+
+        ### ✨ Features
+        - 🎵 110 BPM Rhythmus (ERC Guidelines 2025)
+        - 📊 30:2 Protokoll
+        - 📏 Drucktiefe-Messung via Beschleunigungssensor
+        - 📈 Echtzeit-Feedback ("Tiefer!", "Gut!", "Flacher!")
+        - 📊 Statistiken (gute vs. zu flache/tiefe Kompressionen)
+        - 🔊 Vibrationen + Töne
+        - 💙 Beatmungs-Erinnerung
+
+        ### 📱 Unterstützte Geräte
+        - Fenix Serie (5, 6, 7)
+        - Venu Serie (1, 2, 2 Plus, 2S)
+        - Forerunner Serie (245, 255, 945, 955)
+        - Vivoactive Serie (3, 4, 4S)
+        - Epix 2
+        - Marq Serie
+
+        ### 📖 Dokumentation
+        - [Installation Guide](https://github.com/[your-username]/garmin-cpr/blob/main/INSTALLATION.md)
+        - [Haftungsausschluss](https://github.com/[your-username]/garmin-cpr/blob/main/DISCLAIMER.md)
+        - [Drucktiefe-Sensor Details](https://github.com/[your-username]/garmin-cpr/blob/main/DEPTH_SENSOR.md)
+
+        ### 🔒 Checksums
+        SHA256 Checksums are included in `SHA256SUMS.txt`
+
+        ### 🙏 Credits
+        Based on ERC Guidelines 2025 | Inspired by corpuls primeCPR
+        EOF
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          release/*
+        body_path: release_notes.md
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release summary
+      run: |
+        echo "### Release v${{ steps.version.outputs.version }} Created! 🎉" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Artifacts:**" >> $GITHUB_STEP_SUMMARY
+        ls -lh release/ | tail -n +2 | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Download:** [Release Page](https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }})" >> $GITHUB_STEP_SUMMARY

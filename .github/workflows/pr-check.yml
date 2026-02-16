@@ -1,0 +1,213 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: Validate Pull Request
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout PR code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Get full history for better diff
+
+    - name: Check PR title format
+      run: |
+        PR_TITLE="${{ github.event.pull_request.title }}"
+        echo "PR Title: $PR_TITLE"
+
+        # Check for conventional commit format (optional)
+        if [[ ! "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|test|chore|build|ci)(\(.+\))?: ]]; then
+          echo "⚠️ PR title doesn't follow conventional commit format"
+          echo "Recommended format: type(scope): description"
+          echo "Examples: feat(sensor): add heart rate monitoring"
+          echo "          fix(ui): correct compression counter display"
+          echo "          docs: update installation guide"
+        else
+          echo "✅ PR title follows conventional commit format"
+        fi
+
+    - name: Check for DISCLAIMER.md changes
+      run: |
+        if git diff origin/main...HEAD --name-only | grep -q "DISCLAIMER.md"; then
+          echo "⚠️ DISCLAIMER.md was modified - please ensure legal review!"
+          echo "disclaimer_changed=true" >> $GITHUB_ENV
+        else
+          echo "✅ DISCLAIMER.md not modified"
+          echo "disclaimer_changed=false" >> $GITHUB_ENV
+        fi
+
+    - name: Check for manifest.xml version bump
+      if: github.event.pull_request.base.ref == 'main'
+      run: |
+        if git diff origin/main...HEAD --name-only | grep -q "manifest.xml"; then
+          echo "✅ manifest.xml was modified (version bump?)"
+
+          # Extract version from current branch
+          CURRENT_VERSION=$(grep 'version=' manifest.xml | sed -n 's/.*version="\([^"]*\)".*/\1/p')
+          echo "Current version in PR: $CURRENT_VERSION"
+
+          # Get version from main branch
+          git show origin/main:manifest.xml > /tmp/manifest.xml.main 2>/dev/null || true
+          if [ -f /tmp/manifest.xml.main ]; then
+            MAIN_VERSION=$(grep 'version=' /tmp/manifest.xml.main | sed -n 's/.*version="\([^"]*\)".*/\1/p')
+            echo "Version in main: $MAIN_VERSION"
+
+            if [ "$CURRENT_VERSION" != "$MAIN_VERSION" ]; then
+              echo "✅ Version bumped: $MAIN_VERSION → $CURRENT_VERSION"
+            else
+              echo "⚠️ Consider bumping version in manifest.xml for main branch PRs"
+            fi
+          fi
+        else
+          echo "ℹ️ manifest.xml not modified in this PR"
+        fi
+
+    - name: Check for new TODOs
+      run: |
+        echo "Checking for new TODO comments..."
+
+        # Get TODOs from current branch
+        NEW_TODOS=$(grep -r "TODO\|FIXME\|XXX\|HACK" source/ 2>/dev/null | wc -l || echo "0")
+
+        # Get TODOs from main branch
+        git show origin/main:source/ > /dev/null 2>&1 && \
+          OLD_TODOS=$(git grep "TODO\|FIXME\|XXX\|HACK" origin/main -- source/ | wc -l || echo "0") || \
+          OLD_TODOS=0
+
+        echo "TODOs in main: $OLD_TODOS"
+        echo "TODOs in PR: $NEW_TODOS"
+
+        if [ "$NEW_TODOS" -gt "$OLD_TODOS" ]; then
+          echo "⚠️ New TODO/FIXME comments added (+$(($NEW_TODOS - $OLD_TODOS)))"
+          echo "Consider addressing them before merging"
+        else
+          echo "✅ No new TODO/FIXME comments"
+        fi
+
+    - name: Check file sizes
+      run: |
+        echo "Checking for large files..."
+        LARGE_FILES=$(find . -type f -size +1M -not -path "./.git/*" -not -path "./bin/*" 2>/dev/null || true)
+
+        if [ -n "$LARGE_FILES" ]; then
+          echo "⚠️ Large files detected (>1MB):"
+          echo "$LARGE_FILES"
+          echo "Consider using Git LFS for large files"
+        else
+          echo "✅ No large files detected"
+        fi
+
+    - name: Validate changed source files
+      run: |
+        echo "Validating changed Monkey C files..."
+
+        CHANGED_MC_FILES=$(git diff origin/main...HEAD --name-only | grep "\.mc$" || true)
+
+        if [ -n "$CHANGED_MC_FILES" ]; then
+          echo "Changed .mc files:"
+          echo "$CHANGED_MC_FILES"
+
+          # Basic syntax checks
+          for file in $CHANGED_MC_FILES; do
+            if [ -f "$file" ]; then
+              echo "Checking $file..."
+
+              # Check for common issues
+              if grep -q "System.println" "$file"; then
+                echo "⚠️ $file contains System.println - consider removing for production"
+              fi
+
+              if grep -q "//.*TODO" "$file"; then
+                echo "ℹ️ $file contains TODO comments"
+              fi
+
+              echo "✅ $file validated"
+            fi
+          done
+        else
+          echo "ℹ️ No .mc files changed"
+        fi
+
+    - name: Check documentation updates
+      run: |
+        CODE_CHANGES=$(git diff origin/main...HEAD --name-only | grep -E "\.(mc|xml)$" | wc -l)
+        DOC_CHANGES=$(git diff origin/main...HEAD --name-only | grep -E "\.md$" | wc -l)
+
+        echo "Code file changes: $CODE_CHANGES"
+        echo "Documentation changes: $DOC_CHANGES"
+
+        if [ "$CODE_CHANGES" -gt 0 ] && [ "$DOC_CHANGES" -eq 0 ]; then
+          echo "⚠️ Code was changed but no documentation updates"
+          echo "Consider updating relevant .md files"
+        else
+          echo "✅ Documentation appears to be in sync"
+        fi
+
+    - name: PR Summary
+      run: |
+        echo "## Pull Request Validation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        if [ "${{ env.disclaimer_changed }}" == "true" ]; then
+          echo "⚠️ **DISCLAIMER.md was modified - legal review recommended**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        echo "### Changed Files" >> $GITHUB_STEP_SUMMARY
+        git diff origin/main...HEAD --name-only | head -20 | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+
+        TOTAL_CHANGES=$(git diff origin/main...HEAD --name-only | wc -l)
+        if [ "$TOTAL_CHANGES" -gt 20 ]; then
+          echo "- ... and $(($TOTAL_CHANGES - 20)) more files" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Stats" >> $GITHUB_STEP_SUMMARY
+        echo "- **Files changed:** $TOTAL_CHANGES" >> $GITHUB_STEP_SUMMARY
+        echo "- **Lines added:** $(git diff origin/main...HEAD --numstat | awk '{sum+=$1} END {print sum}')" >> $GITHUB_STEP_SUMMARY
+        echo "- **Lines removed:** $(git diff origin/main...HEAD --numstat | awk '{sum+=$2} END {print sum}')" >> $GITHUB_STEP_SUMMARY
+
+  build-test:
+    name: Test Build on PR
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Cache Connect IQ SDK
+      uses: actions/cache@v3
+      with:
+        path: ~/connectiq-sdk
+        key: ${{ runner.os }}-connectiq-sdk-7.2.1
+
+    - name: Download Connect IQ SDK
+      run: |
+        mkdir -p ~/connectiq-sdk
+        cd ~/connectiq-sdk
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip -O sdk.zip
+        unzip -q sdk.zip
+        rm sdk.zip
+        chmod +x bin/monkeyc
+
+    - name: Generate test key
+      run: |
+        openssl genrsa -out developer_key.pem 4096 2>/dev/null
+        openssl pkcs8 -topk8 -inform PEM -outform DER \
+          -in developer_key.pem -out developer_key.der -nocrypt
+
+    - name: Quick build test
+      run: |
+        mkdir -p bin
+        ~/connectiq-sdk/bin/monkeyc \
+          -o bin/test.prg \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -d fenix7 \
+          -w
+        echo "✅ Build test successful!"

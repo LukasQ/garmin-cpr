@@ -1,0 +1,110 @@
+name: Nightly Build
+
+on:
+  schedule:
+    # Run every day at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  nightly-build:
+    name: Nightly Compatibility Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout latest main
+      uses: actions/checkout@v4
+      with:
+        ref: main
+
+    - name: Cache SDK
+      uses: actions/cache@v3
+      with:
+        path: ~/connectiq-sdk
+        key: ${{ runner.os }}-connectiq-sdk-7.2.1
+
+    - name: Install SDK
+      run: |
+        mkdir -p ~/connectiq-sdk
+        cd ~/connectiq-sdk
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip -O sdk.zip
+        unzip -q sdk.zip
+        rm sdk.zip
+        chmod +x bin/monkeyc
+
+    - name: Generate key
+      run: |
+        openssl genrsa -out developer_key.pem 4096 2>/dev/null
+        openssl pkcs8 -topk8 -inform PEM -outform DER \
+          -in developer_key.pem -out developer_key.der -nocrypt
+
+    - name: Build for all devices
+      continue-on-error: true
+      run: |
+        mkdir -p bin logs
+
+        DEVICES=(
+          fenix7 fenix7s fenix7x
+          fenix6 fenix6s fenix6xpro
+          fenix5 fenix5s fenix5x
+          venu venu2 venu2plus venu2s
+          vivoactive3 vivoactive4 vivoactive4s
+          forerunner245 forerunner255 forerunner945 forerunner955
+          epix2 marq
+        )
+
+        SUCCESS=0
+        FAILED=0
+
+        for device in "${DEVICES[@]}"; do
+          echo "Building for $device..."
+          if ~/connectiq-sdk/bin/monkeyc \
+            -o "bin/CPRTrainer-${device}.prg" \
+            -f monkey.jungle \
+            -y developer_key.der \
+            -d "$device" \
+            -w > "logs/${device}.log" 2>&1; then
+            echo "✅ $device: SUCCESS"
+            SUCCESS=$((SUCCESS + 1))
+          else
+            echo "❌ $device: FAILED"
+            FAILED=$((FAILED + 1))
+            cat "logs/${device}.log"
+          fi
+        done
+
+        echo "SUCCESS_COUNT=$SUCCESS" >> $GITHUB_ENV
+        echo "FAILED_COUNT=$FAILED" >> $GITHUB_ENV
+
+    - name: Upload logs
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: nightly-build-logs
+        path: logs/
+        retention-days: 7
+
+    - name: Create summary
+      run: |
+        echo "# Nightly Build Report 🌙" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Date:** $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Results" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Successful builds: ${{ env.SUCCESS_COUNT }}" >> $GITHUB_STEP_SUMMARY
+        echo "- ❌ Failed builds: ${{ env.FAILED_COUNT }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        if [ "${{ env.FAILED_COUNT }}" -gt 0 ]; then
+          echo "⚠️ Some builds failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
+        else
+          echo "✅ All builds successful!" >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Notify on failure
+      if: env.FAILED_COUNT > 0
+      run: |
+        echo "⚠️ Nightly build has failures!"
+        echo "Failed builds: ${{ env.FAILED_COUNT }}"
+        # Here you could add Slack/Discord notification
+        # or create an issue automatically
