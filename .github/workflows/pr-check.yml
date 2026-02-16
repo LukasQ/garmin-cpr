@@ -181,7 +181,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Cache Connect IQ SDK
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/connectiq-sdk
         key: ${{ runner.os }}-connectiq-sdk-7.2.1

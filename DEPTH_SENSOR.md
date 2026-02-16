@@ -1,319 +1,319 @@
-# Drucktiefe-Messung mit Beschleunigungssensor
+# Compression Depth Measurement with Accelerometer
 
-## 🎯 Feature-Übersicht
+## 🎯 Feature Overview
 
-Die CPR Trainer App nutzt den **Beschleunigungssensor** (Accelerometer) deiner Garmin Uhr, um die **Drucktiefe** bei der Herzdruckmassage zu bewerten und Echtzeit-Feedback zu geben.
+The CPR Trainer app uses the **accelerometer** (accelerometer sensor) of your Garmin watch to evaluate **compression depth** during chest compressions and provide real-time feedback.
 
-## 🔬 Wie funktioniert es?
+## 🔬 How It Works
 
-### Sensor-Technologie
+### Sensor Technology
 
 ```
-Garmin Uhr am Handgelenk
+Garmin watch on wrist
         ↓
-Beschleunigungssensor misst Bewegung in 3 Achsen:
-  • X-Achse: Links/Rechts
-  • Y-Achse: Vor/Zurück
-  • Z-Achse: Auf/Ab (WICHTIG für CPR!)
+Accelerometer measures movement in 3 axes:
+  • X-axis: Left/Right
+  • Y-axis: Forward/Backward
+  • Z-axis: Up/Down (IMPORTANT for CPR!)
         ↓
-Z-Achsen-Beschleunigung = Vertikale Bewegung
+Z-axis acceleration = Vertical movement
         ↓
-Amplitude der Bewegung ≈ Drucktiefe
+Amplitude of movement ≈ Compression depth
 ```
 
-### Messlogik
+### Measurement Logic
 
-Die App trackt die **maximale Z-Achsen-Beschleunigung** während jeder Kompression:
+The app tracks the **maximum Z-axis acceleration** during each compression:
 
-| Beschleunigung (g) | Geschätzte Tiefe | Bewertung | Feedback |
-|-------------------|------------------|-----------|----------|
-| < 1.5 g | < 5 cm | ❌ Zu flach | "▼ Tiefer!" + kurze Vibration |
-| 1.5 - 2.5 g | 5-6 cm | ✅ Optimal | "✓ Gut!" + Success-Ton (alle 5x) |
-| > 2.5 g | > 6 cm | ⚠️ Zu tief | "▲ Flacher!" + Doppel-Vibration |
+| Acceleration (g) | Estimated Depth | Assessment | Feedback |
+|------------------|-----------------|------------|----------|
+| < 1.5 g | < 5 cm | ❌ Too shallow | "▼ Deeper!" + short vibration |
+| 1.5 - 2.5 g | 5-6 cm | ✅ Optimal | "✓ Good!" + success tone (every 5x) |
+| > 2.5 g | > 6 cm | ⚠️ Too deep | "▲ Shallower!" + double vibration |
 
-**Basis:** ERC Guidelines 2025 empfehlen **5-6 cm Drucktiefe** für Erwachsene
+**Basis:** ERC Guidelines 2025 recommend **5-6 cm compression depth** for adults
 
-## 📊 Live-Feedback auf der Uhr
+## 📊 Live Feedback on Watch
 
-### Während des Trainings siehst du:
+### During Training You See:
 
 ```
 ┌─────────────────────┐
-│      15/30         │  ← Kompression im Zyklus
+│      15/30         │  ← Compression in cycle
 │                     │
-│    ✓ Gut!          │  ← Drucktiefe-Feedback
-│   18/20 gut        │  ← Statistik (gute/gesamt)
+│    ✓ Good!         │  ← Depth feedback
+│   18/20 good       │  ← Statistics (good/total)
 │                     │
-│    Zyklus: 2       │
+│    Cycle: 2        │
 └─────────────────────┘
 ```
 
-### Feedback-Typen:
+### Feedback Types:
 
-| Symbol | Bedeutung | Farbe | Haptik |
-|--------|-----------|-------|--------|
-| **▼ Tiefer!** | Drücke kräftiger | 🟠 Orange | 1x kurze Vibration |
-| **✓ Gut!** | Perfekte Tiefe | 🟢 Grün | Success-Ton alle 5 Kompressionen |
-| **▲ Flacher!** | Nicht so tief drücken | 🟡 Gelb | 2x kurze Vibration |
+| Symbol | Meaning | Color | Haptics |
+|--------|---------|-------|---------|
+| **▼ Deeper!** | Press harder | 🟠 Orange | 1x short vibration |
+| **✓ Good!** | Perfect depth | 🟢 Green | Success tone every 5 compressions |
+| **▲ Shallower!** | Don't press as deep | 🟡 Yellow | 2x short vibration |
 
-## 🎯 Optimale Nutzung
+## 🎯 Optimal Use
 
-### Positionierung der Uhr
+### Watch Positioning
 
 ```
-                🙋 Helfer
+                🙋 Responder
 
          ┌───────────┐
-         │  ⌚ Uhr    │  ← Am Handgelenk der aktiven Hand
+         │  ⌚ Watch  │  ← On wrist of active hand
          └───────────┘
               │
               │
               ↓
          ┌───────┐
-         │   💓   │  ← Auf Brustbein des Patienten
+         │   💓   │  ← On patient's sternum
          └───────┘
 ```
 
-**Wichtig:**
-- Uhr am **aktiven Handgelenk** tragen (die Hand, die oben liegt)
-- Arme **gestreckt** und **senkrecht** über dem Patienten
-- Bewegung kommt aus der **Hüfte**, nicht aus den Armen
+**Important:**
+- Watch on **active wrist** (the hand on top)
+- Arms **straight** and **perpendicular** over patient
+- Movement comes from **hips**, not arms
 
-### Kalibrierung
+### Calibration
 
-Die App nutzt **relative Messungen** - keine manuelle Kalibrierung nötig!
+The app uses **relative measurements** - no manual calibration needed!
 
-Die Schwellenwerte sind auf durchschnittliche Körpergröße und -kraft optimiert:
-- Erwachsener mittlerer Statur: **5-6 cm Drucktiefe**
-- Entspricht: **1.5-2.5 g Beschleunigung** am Handgelenk
+The thresholds are optimized for average body size and strength:
+- Average adult: **5-6 cm compression depth**
+- Corresponds to: **1.5-2.5 g acceleration** at wrist
 
-## ⚠️ Limitierungen & Genauigkeit
+## ⚠️ Limitations & Accuracy
 
-### Was die App KANN:
+### What the App CAN Do:
 
-✅ **Relative Drucktiefe** bewerten (zu flach, gut, zu tief)
-✅ **Konsistenz** überwachen (sind alle Kompressionen ähnlich tief?)
-✅ **Echtzeit-Feedback** geben zur Verbesserung der Technik
-✅ **Statistiken** liefern über deine CPR-Qualität
+✅ **Relative depth** assessment (too shallow, good, too deep)
+✅ **Consistency** monitoring (are all compressions similarly deep?)
+✅ **Real-time feedback** to improve technique
+✅ **Statistics** on your CPR quality
 
-### Was die App NICHT KANN:
+### What the App CANNOT Do:
 
-❌ **Absolute Zentimeter** messen (keine direkte Brustkorb-Messung)
-❌ **Medizinisch zertifizierte** Messungen (kein Medizinprodukt!)
-❌ **Hand-Position** erkennen (du musst korrekt positioniert sein)
-❌ **Individuelle Anatomie** berücksichtigen (Standardwerte für Erwachsene)
+❌ **Absolute centimeters** (no direct chest measurement)
+❌ **Medically certified** measurements (not a medical device!)
+❌ **Hand position** detection (you must be correctly positioned)
+❌ **Individual anatomy** consideration (standard values for adults)
 
-### Genauigkeit
+### Accuracy
 
-**Unter idealen Bedingungen:**
-- ±1 cm Genauigkeit
-- 85-90% korrekte Klassifikation (zu flach/gut/zu tief)
+**Under ideal conditions:**
+- ±1 cm accuracy
+- 85-90% correct classification (too shallow/good/too deep)
 
-**Faktoren, die die Genauigkeit beeinflussen:**
-- 📏 Körpergröße (sehr groß/klein weicht ab)
-- 💪 Armhaltung (gebeugt vs. gestreckt)
-- 🏃 Bewegung des Patienten (z.B. in Fahrzeug)
-- 🌀 Rotation der Uhr am Handgelenk
-- 👕 Oberfläche (weiche Matratze vs. harter Boden)
+**Factors affecting accuracy:**
+- 📏 Body size (very tall/short deviates)
+- 💪 Arm position (bent vs. straight)
+- 🏃 Patient movement (e.g., in vehicle)
+- 🌀 Watch rotation on wrist
+- 👕 Surface (soft mattress vs. hard floor)
 
-## 🔧 Technische Details
+## 🔧 Technical Details
 
-### Sensor-Konfiguration
+### Sensor Configuration
 
 ```monkey-c
-// Aktiviere Beschleunigungssensor
+// Activate accelerometer
 Sensor.setEnabledSensors([Sensor.SENSOR_ACCEL]);
 Sensor.enableSensorEvents(method(:onSensorData));
 
-// Callback empfängt Daten ~1-10x pro Sekunde
+// Callback receives data ~1-10x per second
 function onSensorData(sensorInfo) {
-    var accelZ = sensorInfo.accel[2];  // Z-Achse
-    // Tracke Maximum während Druckphase
+    var accelZ = sensorInfo.accel[2];  // Z-axis
+    // Track maximum during compression phase
     if (accelZ.abs() > _maxAccelZ) {
         _maxAccelZ = accelZ.abs();
     }
 }
 ```
 
-### Schwellenwerte-Kalkulation
+### Threshold Calculation
 
-Basierend auf empirischen Tests und Physiologie:
+Based on empirical testing and physiology:
 
 ```
-Handgelenk-Bewegung bei 5-6 cm Brustkorb-Kompression:
-  • Armhebel: ~60-80 cm (durchschnittliche Armlänge)
-  • Bewegungs-Amplitude: ~8-12 cm am Handgelenk
-  • Beschleunigung: ~1.5-2.5 g (bei 110 bpm)
+Wrist movement at 5-6 cm chest compression:
+  • Arm lever: ~60-80 cm (average arm length)
+  • Movement amplitude: ~8-12 cm at wrist
+  • Acceleration: ~1.5-2.5 g (at 110 bpm)
 
-Formel (vereinfacht):
-  Drucktiefe [cm] ≈ max_accel_z [g] × 2.5
+Formula (simplified):
+  Compression depth [cm] ≈ max_accel_z [g] × 2.5
 ```
 
-**Konfigurierbar in `CPRTrainerView.mc`:**
+**Configurable in `CPRTrainerView.mc`:**
 ```monkey-c
 const MIN_DEPTH_THRESHOLD = 1.5;      // g-force
 const OPTIMAL_DEPTH_THRESHOLD = 2.0;
 const MAX_DEPTH_THRESHOLD = 2.5;
 ```
 
-## 📱 Unterstützte Geräte
+## 📱 Supported Devices
 
-### Beschleunigungssensor-Support:
+### Accelerometer Support:
 
-✅ **Alle modernen Garmin Watches** (2018+)
+✅ **All modern Garmin watches** (2018+)
 - Fenix 5/6/7
 - Forerunner 245/255/945/955
 - Venu 1/2
 - Vivoactive 3/4
 - Epix 2
 
-❓ **Ältere Modelle** (2017-)
-- Manche haben keinen oder ungenauen Accelerometer
-- App funktioniert trotzdem (nur Rhythmus, kein Drucktiefe-Feedback)
+❓ **Older models** (2017-)
+- Some have no or inaccurate accelerometer
+- App still works (rhythm only, no depth feedback)
 
-### Fallback-Modus
+### Fallback Mode
 
-Wenn **kein Sensor verfügbar:**
+When **no sensor available:**
 ```
-Start-Screen zeigt:
-  ⚠ Nur Rhythmus
+Start screen shows:
+  ⚠ Rhythm Only
 
-Während CPR:
-  → Keine Drucktiefe-Anzeige
-  → Nur Zeit-Feedback (110/min)
-  → Alle anderen Features funktionieren
+During CPR:
+  → No depth display
+  → Only time feedback (110/min)
+  → All other features work
 ```
 
 ## 🧪 Testing & Validation
 
-### Empfohlene Test-Methode:
+### Recommended Testing Method:
 
-1. **Übungspuppe mit CPR-Feedback** (z.B. Laerdal Resusci Anne)
-2. Nutze CPR Trainer App parallel
-3. Vergleiche Feedback: Puppe vs. App
-4. Adjustiere deine Technik basierend auf beiden
+1. **Practice dummy with CPR feedback** (e.g., Laerdal Resusci Anne)
+2. Use CPR Trainer app in parallel
+3. Compare feedback: Dummy vs. app
+4. Adjust your technique based on both
 
-### Selbst-Kalibrierung:
+### Self-Calibration:
 
 ```
-1. Übe 30 Kompressionen auf Übungspuppe
-2. Puppe sagt: "Gut" bei jeder Kompression
-3. App sollte auch meistens "✓ Gut!" zeigen
-4. Falls nicht: Check deine Armhaltung und Positionierung
+1. Practice 30 compressions on dummy
+2. Dummy says: "Good" for each compression
+3. App should also mostly show "✓ Good!"
+4. If not: Check your arm position and positioning
 ```
 
-## 🎓 Erste-Hilfe-Trainer Integration
+## 🎓 First Aid Trainer Integration
 
-### Für Ausbilder:
+### For Instructors:
 
-Diese App kann **Präsenz-Kurse ergänzen** (nicht ersetzen!):
+This app can **supplement in-person courses** (not replace!):
 
-**Vorteile:**
-- ✅ Sofortiges Feedback für Teilnehmer
-- ✅ Objektive Qualitätsmessung
-- ✅ Motivation durch Statistiken
-- ✅ Üben auch außerhalb des Kurses
+**Advantages:**
+- ✅ Immediate feedback for participants
+- ✅ Objective quality measurement
+- ✅ Motivation through statistics
+- ✅ Practice outside of course too
 
-**Nutzungs-Szenarien:**
-1. **Während des Kurses:** Parallel zur Übungspuppe
-2. **Auffrischung:** Regelmäßiges Training zu Hause (ohne Puppe!)
-3. **Zertifizierung:** Nachweis von Übungsstunden
-4. **Wettbewerbe:** Gamification (wer hat die beste Statistik?)
+**Usage Scenarios:**
+1. **During course:** Parallel to practice dummy
+2. **Refresher:** Regular training at home (without dummy!)
+3. **Certification:** Proof of practice hours
+4. **Competitions:** Gamification (who has best statistics?)
 
-**Wichtig für Trainer:**
-- ⚠️ Betone immer: **App ist Hilfsmittel, kein Ersatz**
-- ⚠️ Korrekte Hand-Position muss gelehrt werden
-- ⚠️ App gibt kein Feedback zu Hand-Position oder Atemwegskontrolle
+**Important for Trainers:**
+- ⚠️ Always emphasize: **App is aid, not replacement**
+- ⚠️ Correct hand position must be taught
+- ⚠️ App gives no feedback on hand position or airway control
 
-## 🔮 Zukünftige Verbesserungen
+## 🔮 Future Improvements
 
 ### Version 1.1+ (Roadmap)
 
-- [ ] **Adaptive Schwellenwerte** - Lerne individuelle Bewegungsmuster
-- [ ] **Hand-Position-Erkennung** - Nutze Gyroskop für Rotation
-- [ ] **Kalibrierungs-Modus** - Manuelle Anpassung der Schwellenwerte
-- [ ] **Detaillierte Grafiken** - Siehe Beschleunigungs-Kurve nach Session
-- [ ] **Export für Trainer** - CSV mit allen Kompressionen und Qualität
+- [ ] **Adaptive thresholds** - Learn individual movement patterns
+- [ ] **Hand position detection** - Use gyroscope for rotation
+- [ ] **Calibration mode** - Manual threshold adjustment
+- [ ] **Detailed graphs** - See acceleration curve after session
+- [ ] **Export for trainers** - CSV with all compressions and quality
 
 ### Version 2.0+ (Vision)
 
-- [ ] **Externe Sensoren** - ANT+ Brustgurt für echte Drucktiefe
-- [ ] **Machine Learning** - Bessere Klassifikation durch Training
-- [ ] **Video-Analyse** - Kombiniere mit Smartphone-Kamera
-- [ ] **Echtzeit-Coaching** - Sprachansagen: "Tiefer drücken!"
+- [ ] **External sensors** - ANT+ chest strap for real depth
+- [ ] **Machine Learning** - Better classification through training
+- [ ] **Video analysis** - Combine with smartphone camera
+- [ ] **Real-time coaching** - Voice announcements: "Press deeper!"
 
-## 📚 Wissenschaftliche Basis
+## 📚 Scientific Basis
 
-### Studien & Referenzen:
+### Studies & References:
 
 1. **ERC Guidelines 2025** - European Resuscitation Council
-   - Empfohlene Drucktiefe: 5-6 cm (Erwachsene)
-   - Kompressionsrate: 100-120/min
+   - Recommended depth: 5-6 cm (adults)
+   - Compression rate: 100-120/min
    - [erc.edu](https://www.erc.edu/guidelines)
 
-2. **Accelerometer-basiertes CPR-Feedback** (diverse Studien)
+2. **Accelerometer-based CPR feedback** (various studies)
    - Feasibility of wearable sensors for CPR quality monitoring
-   - Korrelation zwischen Handgelenk-Bewegung und Brustkorb-Kompression
-   - Genauigkeit: 85-92% bei optimalen Bedingungen
+   - Correlation between wrist movement and chest compression
+   - Accuracy: 85-92% under optimal conditions
 
-3. **Corpuls primeCPR** - Vorbild für diese App
-   - Kommerzielles CPR-Feedback-Gerät
-   - Nutzt ähnliche Sensor-Technologie
+3. **Corpuls primeCPR** - Model for this app
+   - Commercial CPR feedback device
+   - Uses similar sensor technology
    - [corpuls.world](https://corpuls.world/produkte/corpuls3t/#primeCPR)
 
 ## ❓ FAQ
 
-### Warum misst die App nicht exakt in Zentimetern?
+### Why doesn't the app measure exactly in centimeters?
 
-Die Uhr ist am Handgelenk, nicht am Brustkorb. Wir messen die **Hand-Bewegung** und schätzen daraus die **Brustkorb-Kompression**. Das ist weniger präzise als direktes Messen, aber **gut genug für Echtzeit-Feedback**.
+The watch is on the wrist, not on the chest. We measure **hand movement** and estimate **chest compression** from it. This is less precise than direct measurement, but **good enough for real-time feedback**.
 
-### Ist die App so gut wie primeCPR von Corpuls?
+### Is the app as good as primeCPR from corpuls?
 
-**Nein.** PrimeCPR ist ein medizinisch zertifiziertes Gerät mit dediziertem Sensor, der direkt am Brustkorb angebracht wird. Diese App ist ein **Trainings-Tool** für den Consumer-Bereich.
+**No.** PrimeCPR is a medically certified device with dedicated sensor attached directly to the chest. This app is a **training tool** for the consumer sector.
 
-### Kann ich die App im echten Notfall verwenden?
+### Can I use the app in a real emergency?
 
-**Nicht primär dafür gedacht!** Im Notfall:
-1. 🚨 **Erst 112 anrufen**
-2. 💪 **Sofort mit CPR beginnen**
-3. ⌚ App kann unterstützen (wenn Zeit zum Starten)
+**Not primarily intended for that!** In an emergency:
+1. 🚨 **Call 911/112 first**
+2. 💪 **Begin CPR immediately**
+3. ⌚ App can assist (if time to start)
 
-Die App ist hauptsächlich für **Training und Auffrischung**.
+The app is mainly for **training and refresher**.
 
-### Funktioniert das auch mit Smartwatches anderer Hersteller?
+### Does it work with smartwatches from other manufacturers?
 
-**Nein**, nur Garmin Connect IQ. Aber das Konzept kann adaptiert werden für:
+**No**, only Garmin Connect IQ. But the concept can be adapted for:
 - Apple Watch (Swift/HealthKit)
 - Wear OS (Kotlin/Android)
 - Samsung Galaxy Watch (Tizen/WearOS)
 
-Open Source → Porting willkommen!
+Open source → Porting welcome!
 
-### Wie genau muss ich die Uhr tragen?
+### How exactly must I wear the watch?
 
-**Standard-Trageweise** wie beim Sport:
-- Fest, aber nicht zu eng
-- 1-2 Finger breit über dem Handgelenk-Knochen
-- Display nach oben (normal)
+**Standard wearing style** like during sports:
+- Snug but not too tight
+- 1-2 fingers above wrist bone
+- Display facing up (normal)
 
-Keine spezielle Positionierung nötig!
+No special positioning needed!
 
 ---
 
 ## 🤝 Feedback & Improvement
 
-Hast du die App mit einer echten CPR-Übungspuppe getestet?
+Have you tested the app with a real CPR practice dummy?
 
-**Bitte teile deine Erkenntnisse:**
+**Please share your findings:**
 - GitHub Issues: [github.com/[username]/garmin-cpr/issues]
-- Email: feedback@[deine-domain].de
-- Diskussionen: [github.com/[username]/garmin-cpr/discussions]
+- Email: feedback@[your-domain].com
+- Discussions: [github.com/[username]/garmin-cpr/discussions]
 
-**Besonders wertvoll:**
-- 🎓 Feedback von Erste-Hilfe-Trainern
-- 🔬 Vergleichstests mit professionellen CPR-Geräten
-- 📊 Daten über Genauigkeit bei verschiedenen Körpergrößen
+**Especially valuable:**
+- 🎓 Feedback from first aid trainers
+- 🔬 Comparison tests with professional CPR devices
+- 📊 Data on accuracy at different body sizes
 
 ---
 
-**Disclaimer:** Diese Dokumentation beschreibt ein experimentelles Feature zu Trainingszwecken. Keine medizinische Zulassung. Keine Haftung für Ungenauigkeiten.
+**Disclaimer:** This documentation describes an experimental feature for training purposes. No medical approval. No liability for inaccuracies.

@@ -6,40 +6,40 @@ using Toybox.Attention;
 using Toybox.Sensor;
 
 /**
- * CPRTrainerView - Hauptansicht der CPR Trainer App
- * Zeigt visuelles Feedback im Uhrzeigersinn und gibt akustische Signale
- * Misst Drucktiefe über Beschleunigungssensor
+ * CPRTrainerView - Main view of the CPR Trainer App
+ * Shows visual feedback clockwise and provides acoustic signals
+ * Measures compression depth via accelerometer
  */
 class CPRTrainerView extends WatchUi.View {
 
-    // CPR Parameter nach ERC Guidelines
-    const COMPRESSIONS_PER_MINUTE = 110; // Optimal zwischen 100-120
+    // CPR Parameters per ERC Guidelines
+    const COMPRESSIONS_PER_MINUTE = 110; // Optimal between 100-120
     const COMPRESSIONS_BEFORE_BREATH = 30;
     const BREATH_COUNT = 2;
-    const COMPRESSION_INTERVAL = 60000 / COMPRESSIONS_PER_MINUTE; // ms pro Kompression
+    const COMPRESSION_INTERVAL = 60000 / COMPRESSIONS_PER_MINUTE; // ms per compression
 
-    // Drucktiefe-Parameter (5-6 cm ist optimal)
-    const MIN_DEPTH_THRESHOLD = 1.5; // g-force (entspricht ca. 5 cm)
-    const OPTIMAL_DEPTH_THRESHOLD = 2.0; // g-force (entspricht ca. 5.5 cm)
-    const MAX_DEPTH_THRESHOLD = 2.5; // g-force (entspricht ca. 6 cm)
+    // Compression depth parameters (5-6 cm is optimal)
+    const MIN_DEPTH_THRESHOLD = 1.5; // g-force (approximately 5 cm)
+    const OPTIMAL_DEPTH_THRESHOLD = 2.0; // g-force (approximately 5.5 cm)
+    const MAX_DEPTH_THRESHOLD = 2.5; // g-force (approximately 6 cm)
 
     // Status
     private var _isRunning = false;
     private var _compressionCount = 0;
     private var _cycleCount = 0;
     private var _timer;
-    private var _currentAngle = 0; // Aktueller Winkel für Animation
-    private var _pulsePhase = 0; // 0 = drücken, 1 = entlasten
+    private var _currentAngle = 0; // Current angle for animation
+    private var _pulsePhase = 0; // 0 = press, 1 = release
 
-    // Sensor-Daten
+    // Sensor data
     private var _sensorEnabled = false;
     private var _accelerometerData = null;
     private var _lastAccelZ = 0.0;
-    private var _maxAccelZ = 0.0; // Maximale Z-Beschleunigung in aktueller Kompression
-    private var _compressionDepth = 0.0; // Geschätzte Drucktiefe
-    private var _depthQuality = 0; // 0=zu flach, 1=gut, 2=zu tief
+    private var _maxAccelZ = 0.0; // Maximum Z-acceleration in current compression
+    private var _compressionDepth = 0.0; // Estimated compression depth
+    private var _depthQuality = 0; // 0=too shallow, 1=good, 2=too deep
 
-    // Statistiken
+    // Statistics
     private var _goodCompressions = 0;
     private var _shallowCompressions = 0;
     private var _deepCompressions = 0;
@@ -48,30 +48,30 @@ class CPRTrainerView extends WatchUi.View {
         View.initialize();
         _timer = new Timer.Timer();
 
-        // Beschleunigungssensor aktivieren
+        // Activate accelerometer sensor
         if (Sensor has :enableSensorEvents) {
             try {
                 Sensor.setEnabledSensors([Sensor.SENSOR_ACCEL]);
                 Sensor.enableSensorEvents(method(:onSensorData));
                 _sensorEnabled = true;
             } catch (e) {
-                System.println("Sensor nicht verfügbar: " + e.getErrorMessage());
+                System.println("Sensor not available: " + e.getErrorMessage());
                 _sensorEnabled = false;
             }
         }
     }
 
-    // Callback für Beschleunigungssensor-Daten
+    // Callback for accelerometer sensor data
     function onSensorData(sensorInfo) {
         if (sensorInfo has :accel && sensorInfo.accel != null) {
             _accelerometerData = sensorInfo.accel;
 
-            // Z-Achse ist die vertikale Bewegung (wichtig für Drucktiefe)
+            // Z-axis is vertical movement (important for compression depth)
             var accelZ = _accelerometerData[2];
             if (accelZ != null) {
                 _lastAccelZ = accelZ;
 
-                // Tracke maximale Beschleunigung während Druckphase
+                // Track maximum acceleration during compression phase
                 if (_isRunning && _pulsePhase == 0) {
                     var absAccelZ = accelZ.abs();
                     if (absAccelZ > _maxAccelZ) {
@@ -109,7 +109,7 @@ class CPRTrainerView extends WatchUi.View {
         dc.drawCircle(centerX, centerY, radius);
 
         if (_isRunning) {
-            // Zeichne Fortschritt im Uhrzeigersinn (Start oben, 12 Uhr)
+            // Draw progress clockwise (start at top, 12 o'clock)
             var progressAngle = (_compressionCount % COMPRESSIONS_BEFORE_BREATH) * 360.0 / COMPRESSIONS_BEFORE_BREATH;
 
             // Zeichne Fortschrittsarc (grün während Kompression)
@@ -155,36 +155,36 @@ class CPRTrainerView extends WatchUi.View {
 
             // Zeige Zyklen
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(centerX, centerY + 30, Graphics.FONT_SMALL, "Zyklus: " + _cycleCount, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, centerY + 30, Graphics.FONT_SMALL, "Cycle: " + _cycleCount, Graphics.TEXT_JUSTIFY_CENTER);
 
-            // Zeige Beatmungsphase
+            // Show breathing phase
             if (_compressionCount % (COMPRESSIONS_BEFORE_BREATH + BREATH_COUNT) >= COMPRESSIONS_BEFORE_BREATH) {
                 dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(centerX, centerY + 55, Graphics.FONT_MEDIUM, "BEATMEN!", Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(centerX, centerY + 55, Graphics.FONT_MEDIUM, "BREATHE!", Graphics.TEXT_JUSTIFY_CENTER);
             }
         } else {
-            // Start-Screen
+            // Start screen
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             dc.drawText(centerX, centerY - 60, Graphics.FONT_LARGE, "CPR Trainer", Graphics.TEXT_JUSTIFY_CENTER);
             dc.drawText(centerX, centerY - 25, Graphics.FONT_SMALL, "110/min", Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(centerX, centerY - 5, Graphics.FONT_SMALL, "30:2 Rhythmus", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, centerY - 5, Graphics.FONT_SMALL, "30:2 Rhythm", Graphics.TEXT_JUSTIFY_CENTER);
 
-            // Sensor-Status anzeigen
+            // Show sensor status
             if (_sensorEnabled) {
                 dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(centerX, centerY + 20, Graphics.FONT_TINY, "✓ Drucktiefe-Sensor", Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(centerX, centerY + 20, Graphics.FONT_TINY, "✓ Depth Sensor", Graphics.TEXT_JUSTIFY_CENTER);
             } else {
                 dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(centerX, centerY + 20, Graphics.FONT_TINY, "⚠ Nur Rhythmus", Graphics.TEXT_JUSTIFY_CENTER);
+                dc.drawText(centerX, centerY + 20, Graphics.FONT_TINY, "⚠ Rhythm Only", Graphics.TEXT_JUSTIFY_CENTER);
             }
 
             // Disclaimer
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(centerX, centerY + 40, Graphics.FONT_XTINY, "Nur für geschulte", Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(centerX, centerY + 50, Graphics.FONT_XTINY, "Ersthelfer!", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, centerY + 40, Graphics.FONT_XTINY, "For trained", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, centerY + 50, Graphics.FONT_XTINY, "responders only!", Graphics.TEXT_JUSTIFY_CENTER);
 
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(centerX, centerY + 70, Graphics.FONT_TINY, "START drücken", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, centerY + 70, Graphics.FONT_TINY, "Press START", Graphics.TEXT_JUSTIFY_CENTER);
         }
     }
 
@@ -242,17 +242,17 @@ class CPRTrainerView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
-    // Timer callback für jede Kompression
+    // Timer callback for each compression
     function onTimerTick() {
         var compressionInCycle = _compressionCount % (COMPRESSIONS_BEFORE_BREATH + BREATH_COUNT);
 
         if (compressionInCycle < COMPRESSIONS_BEFORE_BREATH) {
-            // Kompressionsphase
+            // Compression phase
             _pulsePhase = (_pulsePhase + 1) % 2;
 
-            // Feedback geben
+            // Give feedback
             if (_pulsePhase == 0) {
-                // Druckphase beginnt - Reset für neue Messung
+                // Compression phase begins - reset for new measurement
                 _maxAccelZ = 0.0;
 
                 // Vibration und Ton
@@ -269,19 +269,19 @@ class CPRTrainerView extends WatchUi.View {
             }
 
             if (_pulsePhase == 1) {
-                // Entlastungsphase - Analysiere Drucktiefe der letzten Kompression
+                // Release phase - analyze depth of last compression
                 _compressionCount++;
 
                 if (_sensorEnabled) {
-                    // Bewerte die Drucktiefe basierend auf maximaler Beschleunigung
+                    // Evaluate compression depth based on maximum acceleration
                     _compressionDepth = _maxAccelZ;
 
                     if (_compressionDepth < MIN_DEPTH_THRESHOLD) {
-                        // Zu flach
+                        // Too shallow
                         _depthQuality = 0;
                         _shallowCompressions++;
 
-                        // Zusätzliches haptisches Feedback: Kurze Vibration
+                        // Additional haptic feedback: short vibration
                         if (Attention has :vibrate) {
                             var vibeData = [
                                 new Attention.VibeProfile(30, 50)
@@ -290,11 +290,11 @@ class CPRTrainerView extends WatchUi.View {
                         }
 
                     } else if (_compressionDepth > MAX_DEPTH_THRESHOLD) {
-                        // Zu tief
+                        // Too deep
                         _depthQuality = 2;
                         _deepCompressions++;
 
-                        // Feedback: Doppel-Vibration
+                        // Feedback: double vibration
                         if (Attention has :vibrate) {
                             var vibeData = [
                                 new Attention.VibeProfile(30, 50),
@@ -308,23 +308,23 @@ class CPRTrainerView extends WatchUi.View {
                         _depthQuality = 1;
                         _goodCompressions++;
 
-                        // Feedback: Bestätigungs-Ton
+                        // Feedback: confirmation tone
                         if (Attention has :playTone && _compressionCount % 5 == 0) {
-                            // Alle 5 guten Kompressionen ein Success-Ton
+                            // Success tone every 5 good compressions
                             Attention.playTone(Attention.TONE_SUCCESS);
                         }
                     }
                 }
             }
         } else {
-            // Beatmungsphase
+            // Breathing phase
             _compressionCount++;
 
-            // Nach 2 Beatmungen neuer Zyklus
+            // New cycle after 2 breaths
             if (compressionInCycle == COMPRESSIONS_BEFORE_BREATH + BREATH_COUNT - 1) {
                 _cycleCount++;
 
-                // Längere Vibration für Zyklusende
+                // Longer vibration for cycle end
                 if (Attention has :vibrate) {
                     var vibeData = [
                         new Attention.VibeProfile(100, 300)

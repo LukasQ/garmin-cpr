@@ -1,8 +1,8 @@
 # 🫀 CPR Trainer - Garmin Watch App
 
-> **Dein persönlicher Wiederbelebungs-Assistent basierend auf ERC Guidelines 2025**
+> **Your personal resuscitation assistant based on ERC Guidelines 2025**
 
-Eine professionelle Garmin Connect IQ App, die Ersthelfer bei der Herzdruckmassage (CPR) mit visuellem und akustischem Feedback unterstützt.
+A professional Garmin Connect IQ app that assists trained first responders with cardiopulmonary resuscitation (CPR) through visual and acoustic feedback.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Garmin Connect IQ](https://img.shields.io/badge/Garmin-Connect%20IQ-00A0DF.svg)
@@ -10,477 +10,429 @@ Eine professionelle Garmin Connect IQ App, die Ersthelfer bei der Herzdruckmassa
 
 ---
 
-## ⚠️ WICHTIGER HAFTUNGSAUSSCHLUSS
+## ⚠️ IMPORTANT DISCLAIMER
 
 ```
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃  Diese App ist ein Hilfsmittel zur Unterstützung GESCHULTER       ┃
-┃  Ersthelfer und ersetzt KEINE medizinische Ausbildung.            ┃
+┃  This app is a support tool for TRAINED first responders and      ┃
+┃  does NOT replace medical training.                                ┃
 ┃                                                                    ┃
-┃  Die App übernimmt KEINE Verantwortung für den Ausgang einer      ┃
-┃  Reanimation oder für medizinische Folgen jeglicher Art.          ┃
+┃  The app assumes NO responsibility for the outcome of a           ┃
+┃  resuscitation or any medical consequences.                       ┃
 ┃                                                                    ┃
-┃  IM NOTFALL:                                                       ┃
-┃  1. Rufen Sie SOFORT den Notruf (112 in Europa / 911 in USA)    ┃
-┃  2. Beginnen Sie mit CPR nur, wenn Sie darin geschult sind        ┃
-┃  3. Diese App kann unterstützen - ersetzt aber NICHT Schulung     ┃
+┃  IN AN EMERGENCY:                                                  ┃
+┃  1. Call emergency services IMMEDIATELY (911/112)                 ┃
+┃  2. Begin CPR only if you are trained                             ┃
+┃  3. This app can assist - but does NOT replace training           ┃
 ┃                                                                    ┃
-┃  Keine Haftung. Keine Garantie. Nur für Trainingszwecke.         ┃
+┃  No liability. No warranty. For training purposes only.           ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
 
-**Rechtlicher Hinweis:** Diese Software wird bereitgestellt "wie besehen" ohne jegliche ausdrückliche oder stillschweigende Gewährleistung. Die Entwickler und Mitwirkenden übernehmen keine Haftung für Schäden, die durch die Nutzung dieser Software entstehen, einschließlich, aber nicht beschränkt auf direkte, indirekte, zufällige oder Folgeschäden.
+**Legal Notice:** This software is provided "as is" without any express or implied warranty. The developers and contributors assume no liability for damages arising from the use of this software, including but not limited to direct, indirect, incidental, or consequential damages.
 
-**Empfehlung:** Besuchen Sie einen offiziellen Erste-Hilfe-Kurs bei [DRK](https://www.drk.de), [Johanniter](https://www.johanniter.de), [Malteser](https://www.malteser.de) oder [ASB](https://www.asb.de).
+**Recommendation:** Take an official first aid course with accredited organizations like Red Cross, St. John Ambulance, or local emergency services.
 
 ---
 
 ## 🎯 Features
 
-| Feature | Beschreibung |
-|---------|--------------|
-| 🎵 **110 BPM Rhythmus** | Optimale Kompressionsrate nach ERC 2025 |
-| 📊 **30:2 Protokoll** | 30 Herzdruckmassagen, 2 Beatmungen |
-| 👁️ **Visuelles Feedback** | Fortschrittsanzeige im Uhrzeigersinn |
-| 🔊 **Akustische Signale** | Vibrationen + Töne für jede Kompression |
-| 📏 **Drucktiefe-Messung** | Beschleunigungssensor bewertet 5-6 cm Tiefe (NEU!) |
-| 📈 **Echtzeit-Feedback** | "Tiefer!", "Gut!", "Flacher!" während CPR |
-| 📊 **Statistiken** | Trackt gute vs. zu flache/tiefe Kompressionen |
-| 🔄 **Zyklus-Tracking** | Automatische Zählung der Wiederbelebungs-Zyklen |
-| 💙 **Beatmungs-Timer** | Deutliche Anzeige der Beatmungsphase |
-| ⌚ **Universal** | Funktioniert auf 20+ Garmin Uhrenmodellen |
+| Feature | Description |
+|---------|-------------|
+| 🎵 **110 BPM Rhythm** | Optimal compression rate per ERC 2025 |
+| 📊 **30:2 Protocol** | 30 chest compressions, 2 rescue breaths |
+| 👁️ **Visual Feedback** | Circular progress display (clockwise) |
+| 🔊 **Acoustic Signals** | Vibrations + tones for each compression |
+| 📏 **Depth Measurement** | Accelerometer evaluates 5-6 cm depth |
+| 📈 **Real-time Feedback** | "Deeper!", "Good!", "Shallower!" during CPR |
+| 📊 **Statistics** | Tracks good vs. shallow/deep compressions |
+| 🔄 **Cycle Tracking** | Automatic counting of resuscitation cycles |
+| 💙 **Breath Reminder** | Clear indication of breathing phase |
+| ⌚ **Universal** | Works on 20+ Garmin watch models |
 
 ---
 
-## 📱 Unterstützte Geräte
+## 📱 Supported Devices
 
 <details>
-<summary><b>Klicke hier für die vollständige Geräteliste</b></summary>
+<summary><b>Click here for complete device list</b></summary>
 
-### Fenix Serie
+### Fenix Series
 - Fenix 7 / 7S / 7X
 - Fenix 6 / 6S / 6X Pro
 - Fenix 5 / 5S / 5X
 
-### Forerunner Serie
+### Forerunner Series
 - Forerunner 955 / 945
 - Forerunner 255 / 245
 
-### Venu Serie
+### Venu Series
 - Venu 2 / 2 Plus / 2S
 - Venu
 
-### Weitere
+### Others
 - Epix 2
 - Vivoactive 3 / 4 / 4S
-- Marq Serie
+- Marq Series
 
 </details>
 
 ---
 
-## 🚀 Schnellstart
+## 🚀 Quick Start
 
-### Für Endnutzer: App auf die Uhr laden
+### For End Users: Load App to Watch
 
 ```bash
-# 1. Download die .prg Datei (nach dem Build)
-# 2. Uhr per USB verbinden
-# 3. Kopiere nach: GARMIN/GARMIN/APPS/
-# 4. Uhr trennen und App starten
+# 1. Download the .prg file (after building)
+# 2. Connect watch via USB
+# 3. Copy to: GARMIN/GARMIN/APPS/
+# 4. Disconnect and start app
 ```
 
-**Ausführliche Anleitung:** [INSTALLATION.md](INSTALLATION.md)
+**Detailed Guide:** [INSTALLATION.md](INSTALLATION.md)
 
-### Für Entwickler: Projekt kompilieren
+### For Developers: Build Project
 
 ```bash
-# 1. Connect IQ SDK installieren
-# 2. Developer Key generieren
+# 1. Install Connect IQ SDK
+# 2. Generate developer key
 openssl genrsa -out developer_key.pem 4096
 openssl pkcs8 -topk8 -inform PEM -outform DER \
   -in developer_key.pem -out developer_key.der -nocrypt
 
-# 3. Icon erstellen (optional)
+# 3. Create icon (optional)
 python create_icon.py
 
-# 4. App kompilieren
+# 4. Compile app
 monkeyc -o bin/CPRTrainer.prg -f monkey.jungle \
   -y developer_key.der -d fenix7
 
-# 5. Im Simulator testen
+# 5. Test in simulator
 connectiq
 ```
 
 ---
 
-## 🎮 Bedienung
+## 🎮 Controls
 
-### Grundfunktionen
+### Basic Functions
 
-| Taste | Funktion |
-|-------|----------|
-| **START** | CPR-Training starten/stoppen |
-| **BACK** | Training beenden und App verlassen |
+| Button | Function |
+|--------|----------|
+| **START** | Start/stop CPR training |
+| **BACK** | End training and exit app |
 
-### Während des Trainings
+### During Training
 
-1. **Drück-Phase** (Rot) → Vibriert + Piepton
-2. **Entlastungs-Phase** (Dunkelrot) → Kurze Pause
-3. Nach 30 Kompressionen → **Beatmung** (Blau)
-4. Nach 2 Beatmungen → Neuer Zyklus startet
+1. **Press Phase** (Red) → Vibrates + beep
+2. **Release Phase** (Dark Red) → Short pause
+3. After 30 compressions → **Breathing** (Blue)
+4. After 2 breaths → New cycle starts
 
 ---
 
-## 🏥 Medizinische Grundlage
+## 🏥 Medical Foundation
 
-Diese App folgt den **ERC Guidelines 2025** für Erwachsenen-Reanimation:
+This app follows the **ERC Guidelines 2025** for adult resuscitation [[1]](#-sources--references):
 
-| Parameter | Wert | Quelle |
-|-----------|------|--------|
-| Kompressionsrate | 100-120/min | ERC 2025 [[1]](#-quellen--referenzen) |
-| Optimal in App | 110/min | Mittelwert |
-| Kompressionstiefe | 5-6 cm | ERC 2025 [[1]](#-quellen--referenzen) |
-| Verhältnis | 30:2 | ERC 2025 [[1]](#-quellen--referenzen) |
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| Compression Rate | 100-120/min | ERC 2025 [[1]](#-sources--references) |
+| Optimal in App | 110/min | Average |
+| Compression Depth | 5-6 cm | ERC 2025 [[1]](#-sources--references) |
+| Ratio | 30:2 | ERC 2025 [[1]](#-sources--references) |
 
-**Weitere Informationen:**
-- 📖 Vollständige Quellenliste: [Quellen & Referenzen](#-quellen--referenzen)
-- 📚 BibTeX für akademische Zitierung: [REFERENCES.bib](REFERENCES.bib)
-- 🔬 Wissenschaftliche Studien zum Drucktiefe-Sensor: [DEPTH_SENSOR.md](DEPTH_SENSOR.md)
+**Additional Information:**
+- 📖 Complete source list: [Sources & References](#-sources--references)
+- 📚 BibTeX for academic citation: [REFERENCES.bib](REFERENCES.bib)
+- 🔬 Scientific studies on depth sensor: [DEPTH_SENSOR.md](DEPTH_SENSOR.md)
 
-### ⚠️ WICHTIGER HAFTUNGSAUSSCHLUSS
+### ⚠️ CRITICAL DISCLAIMER
 
 ```
-🚨 Diese App ist NUR ein Trainingstool!
+🚨 This app is ONLY a training tool!
 
-Im echten Notfall:
-1. Rufe SOFORT 112 an
-2. Beginne mit Herzdruckmassage
-3. Diese App kann unterstützen, aber ERSETZT KEINE Erste-Hilfe-Ausbildung
+In a real emergency:
+1. Call emergency services IMMEDIATELY (911/112)
+2. Begin CPR only if trained
+3. This app can assist - does NOT replace training
 
-Keine Haftung für medizinische Folgen. Nur für Trainingszwecke.
+No liability for medical consequences. Training purposes only.
 ```
 
----
-
-## 📚 Dokumentation
-
-| Dokument | Beschreibung |
-|----------|--------------|
-| [DISCLAIMER.md](DISCLAIMER.md) | ⚠️ **Vollständiger Haftungsausschluss (WICHTIG!)** |
-| [INSTALLATION.md](INSTALLATION.md) | Wie du die App entwickelst und auf deine Uhr lädst |
-| [PUBLISHING.md](PUBLISHING.md) | Vollständiger Guide zur Veröffentlichung im Connect IQ Store |
-| [DEPTH_SENSOR.md](DEPTH_SENSOR.md) | Drucktiefe-Messung mit Beschleunigungssensor (detailliert!) |
-| [ICON_GUIDE.md](ICON_GUIDE.md) | Anleitung zum Erstellen des App-Icons |
-| [README_DE.md](README_DE.md) | Ausführliche deutsche Dokumentation |
+**Sources:**
+- ERC Guidelines 2025: https://www.erc.edu/guidelines
+- corpuls primeCPR Inspiration: https://corpuls.world/produkte/corpuls3t/#primeCPR
 
 ---
 
-## 🛠️ Projekt-Struktur
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [DISCLAIMER.md](DISCLAIMER.md) | ⚠️ Liability disclaimer |
+| [INSTALLATION.md](INSTALLATION.md) | Build & installation |
+| [PUBLISHING.md](PUBLISHING.md) | Connect IQ Store guide |
+| [DEPTH_SENSOR.md](DEPTH_SENSOR.md) | Accelerometer depth measurement |
+| [ICON_SPECS.md](ICON_SPECS.md) | Icon design specifications |
+| [CI_CD_GUIDE.md](CI_CD_GUIDE.md) | GitHub Actions pipelines |
+| [DEPENDENCIES.md](DEPENDENCIES.md) | Dependency versions |
+
+---
+
+## 🛠️ Project Structure
 
 ```
 garmin-cpr/
-├── 📱 source/                    # Monkey C Quellcode
-│   ├── CPRTrainerApp.mc         # Haupt-App-Klasse
-│   ├── CPRTrainerView.mc        # UI, Animation, Timer
-│   └── CPRTrainerDelegate.mc    # Button-Handling
+├── 📱 source/                    # Monkey C source code
+│   ├── CPRTrainerApp.mc         # Main app class
+│   ├── CPRTrainerView.mc        # UI, animation, timer
+│   └── CPRTrainerDelegate.mc    # Button handling
 │
 ├── 🎨 resources/                 # Assets
 │   ├── drawables/               # Icons
-│   ├── layouts/                 # UI-Layouts
-│   └── strings/                 # Übersetzungen (DE/EN)
+│   ├── layouts/                 # UI layouts
+│   └── strings/                 # Translations (EN/DE)
 │
-├── 📋 manifest.xml              # App-Metadaten & Geräte
-├── 🔧 monkey.jungle             # Build-Konfiguration
-├── 🐍 create_icon.py            # Icon-Generator-Script
+├── 📋 manifest.xml              # App metadata & devices
+├── 🔧 monkey.jungle             # Build configuration
+├── 🐍 create_icon.py            # Icon generator script
 │
-└── 📖 Dokumentation
-    ├── README.md                # Diese Datei
-    ├── INSTALLATION.md          # Dev & Installation Guide
-    ├── PUBLISHING.md            # Publishing Guide
-    └── ICON_GUIDE.md            # Icon Design Guide
+├── 🔄 .github/                  # CI/CD
+│   ├── workflows/               # GitHub Actions
+│   └── ISSUE_TEMPLATE/          # Issue templates
+│
+└── 📖 Documentation
+    ├── README.md                # This file
+    ├── DISCLAIMER.md            # Legal disclaimer
+    ├── INSTALLATION.md          # Dev & installation guide
+    ├── PUBLISHING.md            # Publishing guide
+    ├── DEPTH_SENSOR.md          # Sensor documentation
+    ├── ICON_GUIDE.md            # Icon design guide
+    ├── CI_CD_GUIDE.md           # CI/CD guide
+    └── REFERENCES.bib           # Sources (BibTeX)
 ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions sind herzlich willkommen! 🎉
+Contributions are welcome! 🎉
 
-### So kannst du beitragen:
+### How to contribute:
 
-1. **Fork** das Repository
-2. **Branch** erstellen (`git checkout -b feature/AwesomeFeature`)
-3. **Commit** deine Änderungen (`git commit -m 'Add AwesomeFeature'`)
-4. **Push** zum Branch (`git push origin feature/AwesomeFeature`)
-5. **Pull Request** öffnen
+1. **Fork** the repository
+2. **Create** a branch (`git checkout -b feature/AwesomeFeature`)
+3. **Commit** your changes (`git commit -m 'Add AwesomeFeature'`)
+4. **Push** to branch (`git push origin feature/AwesomeFeature`)
+5. **Open** a Pull Request
 
-### Ideen für Contributions:
+### Ideas for contributions:
 
-- 🌍 Weitere Sprachen (FR, ES, IT, ...)
-- 👶 CPR-Modi für Kinder und Babys
-- 📊 Statistiken und Session-History
-- 🎙️ Sprachansagen
-- 🧪 Mehr Unit Tests
-- 📱 Support für weitere Garmin Geräte
+- 🌍 More languages (FR, ES, IT, ...)
+- 👶 CPR modes for children and infants
+- 📊 Statistics and session history
+- 🎙️ Voice announcements
+- 🧪 More unit tests
+- 📱 Support for more Garmin devices
 
 ---
 
 ## 🗺️ Roadmap
 
 ### Version 1.1 (Q2 2026)
-- [ ] Verschiedene CPR-Modi (Baby, Kind, Erwachsener)
-- [ ] Einstellungen für Kompressionsrate
-- [ ] Detaillierte Statistiken
+- [ ] Different CPR modes (infant, child, adult)
+- [ ] Configurable compression rate
+- [ ] Detailed statistics
 
 ### Version 1.2 (Q3 2026)
-- [ ] Session History speichern
-- [ ] Export-Funktion
-- [ ] Mehrsprachige Sprachansagen
+- [ ] Save session history
+- [ ] Export function
+- [ ] Multi-language voice announcements
 
 ### Version 2.0 (Q4 2026)
-- [ ] Integration mit Garmin Health Sensors
-- [ ] Echtzeit-Feedback zur Kompressionstiefe
-- [ ] Cloud-Sync für Trainings-Sessions
+- [ ] Integration with Garmin Health Sensors
+- [ ] Real-time compression depth feedback
+- [ ] Cloud sync for training sessions
 
 ---
 
-## 📄 Lizenz
+## 📄 License
 
-Dieses Projekt ist unter der **MIT License** lizenziert.
+This project is licensed under the **MIT License**.
 
-Das bedeutet:
-- ✅ Kostenlose Nutzung
-- ✅ Kommerzielle Nutzung erlaubt
-- ✅ Modifikation erlaubt
-- ✅ Distribution erlaubt
-- ❗ Keine Haftung
-- ❗ Keine Garantie
+This means:
+- ✅ Free to use
+- ✅ Commercial use allowed
+- ✅ Modification allowed
+- ✅ Distribution allowed
+- ❗ No liability
+- ❗ No warranty
 
-Siehe [LICENSE](LICENSE) für Details.
+See [LICENSE](LICENSE) for details.
 
 ---
 
-## 📚 Quellen & Referenzen
+## 📚 Sources & References
 
-### Medizinische Guidelines
+### Medical Guidelines
 
 #### European Resuscitation Council (ERC) Guidelines 2025
-Die App basiert auf den aktuellsten ERC-Leitlinien für Reanimation:
+The app is based on the latest ERC guidelines for resuscitation:
 
-- **Hauptquelle:** ERC Guidelines 2025 - Adult Basic Life Support
+- **Main Source:** ERC Guidelines 2025 - Adult Basic Life Support
   - URL: https://www.erc.edu/science-research/guidelines/guidelines-2025/guidelines-2025-english/
-  - Veröffentlicht: Januar 2025
-  - Zugriff: Februar 2026
+  - Published: January 2025
+  - Accessed: February 2026
 
-**Relevante Parameter aus den Guidelines:**
-- **Kompressionsrate:** 100-120 pro Minute (optimal: 110)
-- **Kompressionstiefe:** 5-6 cm bei Erwachsenen
-- **Kompression-Beatmung-Verhältnis:** 30:2
-- **Minimale Unterbrechungen:** Kompressionen sollen durchgehend erfolgen
-- **Hand-Position:** Mitte des Brustbeins
-- **Arm-Position:** Gestreckt, senkrecht über dem Patienten
+**Relevant Parameters from Guidelines:**
+- **Compression Rate:** 100-120 per minute (optimal: 110)
+- **Compression Depth:** 5-6 cm for adults
+- **Compression-Ventilation Ratio:** 30:2
+- **Minimal Interruptions:** Compressions should be continuous
+- **Hand Position:** Center of chest
+- **Arm Position:** Straight, perpendicular over patient
 
-**Zitierweise:**
+**Citation:**
 ```
 European Resuscitation Council (2025). ERC Guidelines 2025:
 Adult Basic Life Support. Retrieved from https://www.erc.edu/guidelines
 ```
 
-### Technologie-Inspiration
+### Technology Inspiration
 
 #### corpuls primeCPR
-Kommerzielles CPR-Feedback-System, das als Vorbild für diese App diente:
+Commercial CPR feedback system that served as inspiration:
 
-- **Hersteller:** corpuls - GS Elektromedizinische Geräte G. Stemple GmbH
-- **Produkt:** primeCPR Feedbacksensor (Teil des corpuls3T Systems)
+- **Manufacturer:** corpuls - GS Elektromedizinische Geräte G. Stemple GmbH
+- **Product:** primeCPR Feedback Sensor (part of corpuls3T System)
 - **URL:** https://corpuls.world/produkte/corpuls3t/#primeCPR
-- **Funktionsweise:**
-  - Echtzeit-Feedback zu Drucktiefe und -frequenz
-  - Akustische und visuelle Signale
-  - Medizinprodukt-zertifiziert
+- **Functionality:**
+  - Real-time feedback on depth and frequency
+  - Acoustic and visual signals
+  - Medical device certified
 
-**Hinweis:** Diese App ist ein unabhängiges Open-Source-Projekt und nicht von corpuls offiziell unterstützt oder zertifiziert.
+**Note:** This app is an independent open-source project and not officially supported or certified by corpuls.
 
-### Wissenschaftliche Studien zu CPR-Feedback
+### Scientific Studies on CPR Feedback
 
-#### Accelerometer-basierte CPR-Qualitätsmessung
+#### Accelerometer-based CPR Quality Measurement
 
 1. **"Real-time feedback improves chest compression quality in out-of-hospital cardiac arrest"**
-   - Autoren: Kirkegaard et al.
+   - Authors: Kirkegaard et al.
    - Journal: Resuscitation
-   - Jahr: 2023
-   - Findings: Echtzeit-Feedback verbessert CPR-Qualität signifikant
+   - Year: 2023
+   - Findings: Real-time feedback significantly improves CPR quality
 
 2. **"Wearable accelerometers can measure chest compression depth in CPR"**
    - Journal: Prehospital Emergency Care
-   - Jahr: 2022
-   - Findings: Handgelenk-Accelerometer korreliert mit Brustkorb-Kompression (r=0.85-0.92)
+   - Year: 2022
+   - Findings: Wrist accelerometer correlates with chest compression (r=0.85-0.92)
 
 3. **"Feedback devices improve CPR performance: A systematic review"**
-   - Autoren: Yeung et al.
+   - Authors: Yeung et al.
    - Journal: Resuscitation
-   - Jahr: 2021
-   - Meta-Analyse: Feedback-Geräte verbessern Tiefe, Rate und Durchblutung
+   - Year: 2021
+   - Meta-analysis: Feedback devices improve depth, rate, and perfusion
 
-### Technische Dokumentation
+### Technical Documentation
 
 #### Garmin Connect IQ Platform
 
 - **Garmin Developer Portal:** https://developer.garmin.com/connect-iq/
 - **Connect IQ SDK:** https://developer.garmin.com/connect-iq/sdk/
-- **Monkey C API Dokumentation:** https://developer.garmin.com/connect-iq/api-docs/
+- **Monkey C API Documentation:** https://developer.garmin.com/connect-iq/api-docs/
 - **Sensor API (Accelerometer):** https://developer.garmin.com/connect-iq/api-docs/Toybox/Sensor.html
 
 **SDK Version:** Connect IQ SDK 7.x (min: 3.3.0)
 
-#### Open Source Bibliotheken
+### Further Resources
 
-Diese App verwendet keine externen Libraries, nur die Garmin Connect IQ Standard-APIs:
-- `Toybox.WatchUi` - UI Framework
-- `Toybox.Graphics` - Grafik-Rendering
-- `Toybox.Sensor` - Beschleunigungssensor-Zugriff
-- `Toybox.Attention` - Vibrationen & Töne
-- `Toybox.Timer` - Timing-Funktionen
+#### First Aid Organizations (International)
 
-### Weitere Ressourcen
+- **American Red Cross:** https://www.redcross.org/take-a-class/cpr
+- **St. John Ambulance (UK):** https://www.sja.org.uk/
+- **European Resuscitation Council:** https://www.erc.edu/
 
-#### Erste-Hilfe-Organisationen (Deutschland)
+### Academic Citation
 
-- **Deutsches Rotes Kreuz (DRK):** https://www.drk.de/hilfe-in-deutschland/erste-hilfe/
-- **Johanniter-Unfall-Hilfe:** https://www.johanniter.de/dienste-leistungen/erste-hilfe/
-- **Malteser Hilfsdienst:** https://www.malteser.de/erste-hilfe.html
-- **Arbeiter-Samariter-Bund (ASB):** https://www.asb.de/unsere-angebote/erste-hilfe
-
-#### CPR-Training Videos
-
-- **ERC Official Training Videos:** https://www.erc.edu/courses/videos
-- **American Heart Association (AHA) CPR Guidelines:** https://cpr.heart.org/
-- **Laerdal Medical (CPR Training):** https://laerdal.com/
-
-#### Gesetzliche Grundlagen (Deutschland)
-
-- **§ 323c StGB - Unterlassene Hilfeleistung**
-  - Jeder ist verpflichtet, Hilfe zu leisten
-  - CPR-Training empfohlen für alle
-
-- **Fahrerlaubnisverordnung (FeV) § 19**
-  - Erste-Hilfe-Kurs Pflicht für Führerschein
-  - CPR-Training Teil des Kurses
-
-### Datenschutz & Rechtliches
-
-#### Relevante Richtlinien
-
-- **DSGVO (EU):** Diese App sammelt keine personenbezogenen Daten
-- **MDR (Medical Device Regulation):** Diese App ist KEIN Medizinprodukt
-  - Nur für Trainingszwecke
-  - Keine Diagnose oder Behandlungsfunktion
-  - Keine CE-Kennzeichnung erforderlich
-
-#### Haftungsausschluss
-
-Diese App:
-- ✅ Ist ein Trainings- und Übungstool
-- ❌ Ist kein Medizinprodukt
-- ❌ Ersetzt keine professionelle Erste-Hilfe-Ausbildung
-- ❌ Garantiert keine medizinische Genauigkeit
-- ❌ Übernimmt keine Haftung für medizinische Folgen
-
-**Im Notfall immer 112 rufen und professionelle Hilfe anfordern!**
-
-### Akademische Zitierung
-
-Falls du diese App in wissenschaftlichen Arbeiten erwähnen möchtest:
+If you want to reference this app in scientific work:
 
 **BibTeX:**
 ```bibtex
 @software{cpr_trainer_garmin_2026,
-  author = {[Dein Name]},
+  author = {[Your Name]},
   title = {CPR Trainer - Garmin Watch App},
   year = {2026},
   url = {https://github.com/[username]/garmin-cpr},
-  note = {Open-source CPR training application based on ERC Guidelines 2025}
+  note = {Open-source CPR training app based on ERC Guidelines 2025}
 }
 ```
 
 **APA:**
 ```
-[Dein Name]. (2026). CPR Trainer - Garmin Watch App [Computer software].
+[Your Name]. (2026). CPR Trainer - Garmin Watch App [Computer software].
 GitHub. https://github.com/[username]/garmin-cpr
 ```
 
-### Weiterführende Literatur
-
-#### Bücher
-
-1. **"European Resuscitation Council Guidelines for Resuscitation"**
-   - Verlag: Elsevier
-   - ISBN: [wird mit Guidelines 2025 veröffentlicht]
-   - Umfassende Sammlung aller ERC-Leitlinien
-
-2. **"Cardiac Arrest: The Science and Practice of Resuscitation Medicine"**
-   - Autoren: Paradis, Halperin, Kern, Wenzel, Chamberlain
-   - Verlag: Cambridge University Press
-   - ISBN: 978-0521847766
-
-#### Online-Kurse
-
-- **ERC E-Learning:** https://erc-elearning.org/
-- **Garmin Connect IQ Development:** https://developer.garmin.com/connect-iq/connect-iq-basics/
-
 ---
 
-## 🙏 Credits & Danksagungen
+## 🙏 Credits & Acknowledgments
 
 ### Inspiration
-- **corpuls primeCPR** - Vorbild für das Feedback-Konzept ([corpuls.world](https://corpuls.world))
+- **corpuls primeCPR** - Model for feedback concept ([corpuls.world](https://corpuls.world))
 - **European Resuscitation Council (ERC)** - Guidelines 2025 ([erc.edu](https://www.erc.edu))
-- **Laerdal Medical** - CPR-Training-Equipment und -Philosophie
+- **Laerdal Medical** - CPR training equipment and philosophy
 
-### Technologie
-- **Garmin Connect IQ** - Plattform & SDK ([developer.garmin.com](https://developer.garmin.com))
-- **Monkey C** - Programmiersprache für Garmin Wearables
-- **Open Source Community** - Tools, Libraries und Inspiration
+### Technology
+- **Garmin Connect IQ** - Platform & SDK ([developer.garmin.com](https://developer.garmin.com))
+- **Monkey C** - Programming language for Garmin wearables
+- **Open Source Community** - Tools, libraries and inspiration
 
-### Wissenschaftliche Community
-- **Resuscitation Journal** - Peer-reviewed Forschung zu CPR
-- **Prehospital Emergency Care** - Studien zu Notfallmedizin
-- **International Liaison Committee on Resuscitation (ILCOR)** - Globale CPR-Standards
+### Scientific Community
+- **Resuscitation Journal** - Peer-reviewed CPR research
+- **Prehospital Emergency Care** - Emergency medicine studies
+- **International Liaison Committee on Resuscitation (ILCOR)** - Global CPR standards
 
-### Erste-Hilfe-Community
-- **DRK, Johanniter, Malteser, ASB** - Erste-Hilfe-Ausbildung in Deutschland
-- **Alle Ersthelfer weltweit** - Für euren lebensrettenden Einsatz! 🙏
+### First Aid Community
+- **Red Cross, St. John Ambulance** - First aid training worldwide
+- **All first responders worldwide** - For your life-saving work! 🙏
 
 ### Community
-- **Garmin Developer Forum** - Technische Hilfe & Support
-- **Alle Contributors** - Danke für eure PRs und Issues!
-- **Beta-Tester** - Feedback zur App-Qualität
+- **Garmin Developer Forum** - Technical help & support
+- **All Contributors** - Thanks for your PRs and issues!
+- **Beta Testers** - Feedback on app quality
 
 ---
 
-## 📞 Support & Kontakt
+## 📞 Support & Contact
 
-### Probleme melden
-🐛 [GitHub Issues](https://github.com/[dein-username]/garmin-cpr/issues)
+### Report Issues
+🐛 [GitHub Issues](https://github.com/[your-username]/garmin-cpr/issues)
 
-### Diskussionen
-💬 [GitHub Discussions](https://github.com/[dein-username]/garmin-cpr/discussions)
+### Discussions
+💬 [GitHub Discussions](https://github.com/[your-username]/garmin-cpr/discussions)
 
-### Fragen stellen
-📧 Email: support@[deine-domain].de
+### Questions
+📧 Email: support@[your-domain].com
 
 ### Social Media
-- 🐦 Twitter: [@dein-handle]
-- 💼 LinkedIn: [Dein Profil]
+- 🐦 Twitter: [@your-handle]
+- 💼 LinkedIn: [Your Profile]
+
+### External Resources
+- 🏥 Find first aid courses: [Red Cross Course Finder](https://www.redcross.org/take-a-class)
+- 📖 ERC Guidelines: [erc.edu/guidelines](https://www.erc.edu/guidelines)
+- 👨‍💻 Garmin Developer: [developer.garmin.com](https://developer.garmin.com/connect-iq/)
 
 ---
 
 ## 🌟 Star History
 
-Wenn dir dieses Projekt gefällt, gib ihm einen Stern! ⭐
+If you like this project, give it a star! ⭐
 
-Es hilft anderen, das Projekt zu finden und motiviert zur Weiterentwicklung.
+It helps others find the project and motivates further development.
 
 ---
 
@@ -492,84 +444,84 @@ Es hilft anderen, das Projekt zu finden und motiviert zur Weiterentwicklung.
 
 ---
 
-## ⚖️ Erweiterte Haftungsausschlüsse
+## ⚖️ Extended Disclaimers
 
-### Keine medizinische Verantwortung
+### No Medical Responsibility
 
 ```
-Diese App übernimmt KEINE Verantwortung für:
-  ❌ Den Ausgang einer Reanimation
-  ❌ Medizinische Komplikationen oder Folgeschäden
-  ❌ Fehlerhafte oder ungenaue Messungen
-  ❌ Verzögerungen in der Notfallversorgung
-  ❌ Unsachgemäße Anwendung der CPR-Technik
-  ❌ Technische Fehlfunktionen der Hard- oder Software
+This app assumes NO responsibility for:
+  ❌ The outcome of a resuscitation
+  ❌ Medical complications or consequential damages
+  ❌ Incorrect or inaccurate measurements
+  ❌ Delays in emergency care
+  ❌ Improper application of CPR technique
+  ❌ Technical malfunctions of hardware or software
 ```
 
-### Keine offizielle Unterstützung
+### No Official Support
 
-Diese App wurde von einem unabhängigen Entwickler erstellt und
-ist NICHT offiziell unterstützt, zertifiziert oder empfohlen von:
+This app was created by an independent developer and
+is NOT officially supported, certified, or endorsed by:
 - ❌ Garmin International Inc.
 - ❌ European Resuscitation Council (ERC)
 - ❌ Corpuls GmbH
-- ❌ Irgendeiner medizinischen Organisation
-- ❌ Irgendeiner Zertifizierungsstelle für Medizinprodukte
+- ❌ Any medical organization
+- ❌ Any medical device certification authority
 
-### Nur für Trainingszwecke
-
-```
-✓ Geeignet für: Training, Übung, Auffrischung (mit Puppe!)
-✗ NICHT geeignet für: Erstmalige CPR-Ausbildung, ungelernte Anwender
-```
-
-**Die App ersetzt NICHT:**
-- ❌ Einen offiziellen Erste-Hilfe-Kurs
-- ❌ Medizinische Ausbildung oder Zertifizierung
-- ❌ Professionelle medizinische Beratung
-- ❌ Medizinisch zertifizierte Feedback-Geräte
-- ❌ Die Anweisungen von Rettungsdienst/Notarzt
-
-### Technische Einschränkungen
+### Training Purposes Only
 
 ```
-Die Drucktiefe-Messung:
-  ⚠ Ist eine Schätzung, keine exakte Messung
-  ⚠ Kann durch viele Faktoren beeinflusst werden
-  ⚠ Ist NICHT medizinisch zertifiziert
-  ⚠ Ersetzt NICHT professionelle CPR-Feedback-Geräte
+✓ Suitable for: Training, practice, refresher (with dummy!)
+✗ NOT suitable for: Initial CPR training, untrained users
 ```
 
-### Rechtliche Grundlage
+**The app does NOT replace:**
+- ❌ An official first aid course
+- ❌ Medical training or certification
+- ❌ Professional medical advice
+- ❌ Medically certified feedback devices
+- ❌ Instructions from emergency services/paramedics
 
-Basierend auf der MIT License (siehe [LICENSE](LICENSE)):
-- Keine Gewährleistung jeglicher Art
-- Keine Haftung für Schäden (direkt, indirekt, Folgeschäden)
-- Nutzung erfolgt auf eigenes Risiko
-- Software wird "wie besehen" bereitgestellt
-
-### Im Notfall
+### Technical Limitations
 
 ```
-🚨 IMMER ZUERST:
-   1. Notruf 112 wählen (Europa) / 911 (USA)
-   2. Anweisungen der Leitstelle befolgen
-   3. Nur mit CPR beginnen, wenn geschult
+Depth measurement:
+  ⚠ Is an estimate, not exact measurement
+  ⚠ Can be influenced by many factors
+  ⚠ Is NOT medically certified
+  ⚠ Does NOT replace professional CPR feedback devices
+```
 
-⌚ DIESE APP:
-   ✓ Kann unterstützen (Rhythmus, Feedback)
-   ✗ Ersetzt NICHT professionelle Hilfe
-   ✗ Ersetzt NICHT die Leitstellenanweisungen
+### Legal Basis
+
+Based on the MIT License (see [LICENSE](LICENSE)):
+- No warranty of any kind
+- No liability for damages (direct, indirect, consequential)
+- Use at your own risk
+- Software provided "as is"
+
+### In an Emergency
+
+```
+🚨 ALWAYS FIRST:
+   1. Call emergency services (911/112)
+   2. Follow dispatcher instructions
+   3. Begin CPR only if trained
+
+⌚ THIS APP:
+   ✓ Can assist (rhythm, feedback)
+   ✗ Does NOT replace professional help
+   ✗ Does NOT replace dispatcher instructions
 ```
 
 ---
 
 <div align="center">
 
-**Entwickelt mit ❤️ für Ersthelfer weltweit**
+**Developed with ❤️ for first responders worldwide**
 
-*Leben retten lernen - ein Rhythmus nach dem anderen*
+*Learn to save lives - one rhythm at a time*
 
-[⬆ Nach oben](#-cpr-trainer---garmin-watch-app)
+[⬆ Back to top](#-cpr-trainer---garmin-watch-app)
 
 </div>

@@ -1,72 +1,51 @@
-# CPR Trainer - Veröffentlichung im Connect IQ Store
+# CPR Trainer - Publishing to Connect IQ Store
 
-Diese Anleitung zeigt dir, wie du die CPR Trainer App im Garmin Connect IQ Store veröffentlichst und damit für Millionen Garmin-Nutzer weltweit verfügbar machst.
+This guide shows you how to publish the CPR Trainer app in the Garmin Connect IQ Store, making it available to millions of Garmin users worldwide.
 
-## Vorbereitung
+## Preparation
 
-### 1. Garmin Developer Account erstellen
+### 1. Create Garmin Developer Account
 
-1. Gehe zu: https://developer.garmin.com/
-2. Klicke auf "Sign In" und erstelle einen Account
-3. Akzeptiere die Developer Agreement
+1. Go to: https://developer.garmin.com/
+2. Click "Sign In" and create an account
+3. Accept the Developer Agreement
 
-**Wichtig:** Der Account ist kostenlos!
+**Important:** The account is free!
 
-### 2. App gründlich testen
+### 2. Test App Thoroughly
 
-Bevor du veröffentlichst:
-- [ ] Teste auf echten Geräten (nicht nur Simulator)
-- [ ] Teste alle Funktionen (Start, Stop, Kompressions-Feedback)
-- [ ] Überprüfe Vibrationen und Töne
-- [ ] Teste auf verschiedenen Uhrenmodellen (wenn möglich)
-- [ ] Batterieverbrauch prüfen (sollte nicht zu hoch sein)
-- [ ] Teste Edge Cases (z.B. was passiert bei eingehendem Anruf)
+Before publishing:
+- [ ] Test on real devices (not just simulator)
+- [ ] Test all functions (start, stop, compression feedback)
+- [ ] Check vibrations and tones
+- [ ] Test on different watch models (if possible)
+- [ ] Check battery consumption (shouldn't be too high)
+- [ ] Test edge cases (e.g., incoming call during use)
 
-### 3. App-Metadaten vorbereiten
+### 3. Prepare App Metadata
 
-Du brauchst:
+You'll need:
 
-#### Screenshots (Pflicht)
-- **2-5 Screenshots** von der App auf verschiedenen Geräten
-- Empfohlene Größen:
-  - 240x240 (runde Displays)
+#### Screenshots (Required)
+- **2-5 screenshots** of the app on different devices
+- Recommended sizes:
+  - 240x240 (round displays)
   - 260x260
-  - 390x390 (größere Displays)
-- Zeige: Startbildschirm, aktive CPR-Session, verschiedene Phasen
+  - 390x390 (larger displays)
+- Show: Start screen, active CPR session, different phases
 
-#### App Icon (Pflicht)
-- **80x80 Pixel** PNG
-- Sollte auch bei 40x40 gut erkennbar sein
-- Einfach & klar (z.B. Herz-Symbol mit Puls-Linie)
+#### App Icon (Required)
+- **80x80 pixels** PNG
+- Should be recognizable at 40x40
+- Simple & clear (e.g., heart symbol with pulse line)
 
-#### Marketing-Bilder (Optional aber empfohlen)
-- **1280x720 Pixel** Banner
-- Zeigt die App im Kontext
+#### Marketing Images (Optional but recommended)
+- **1280x720 pixels** banner
+- Shows app in context
 
-#### App-Beschreibung
+#### App Description
 
-**Deutsch:**
-```
-CPR Trainer - Dein persönlicher Wiederbelebungs-Assistent
-
-Basierend auf den ERC Guidelines 2025 hilft dir diese App bei der korrekten Durchführung der Herzdruckmassage (CPR):
-
-✓ 110 Kompressionen pro Minute (optimal für Erwachsene)
-✓ 30:2 Rhythmus (30 Kompressionen, 2 Beatmungen)
-✓ Visuelles Feedback im Uhrzeigersinn
-✓ Akustische Signale (Vibrationen + Töne)
-✓ Zyklus-Tracking
-
-Ideal für:
-• Erste-Hilfe-Kurse
-• Auffrischung der CPR-Kenntnisse
-• Training für Ersthelfer
-• Führerschein-Erste-Hilfe-Schulung
-
-WICHTIG: Diese App ersetzt keine professionelle Erste-Hilfe-Ausbildung und ist nur als Trainingstool gedacht. Im Notfall immer 112 rufen!
-```
-
-**Englisch:**
+**English:**
 ```
 CPR Trainer - Your Personal Resuscitation Assistant
 
@@ -76,6 +55,8 @@ Based on ERC Guidelines 2025, this app helps you perform correct CPR (Cardiopulm
 ✓ 30:2 rhythm (30 compressions, 2 rescue breaths)
 ✓ Visual feedback in clockwise direction
 ✓ Acoustic signals (vibrations + tones)
+✓ Compression depth measurement via accelerometer
+✓ Real-time feedback ("Deeper!", "Good!", "Shallower!")
 ✓ Cycle tracking
 
 Perfect for:
@@ -84,238 +65,238 @@ Perfect for:
 • First responder training
 • Driver's license first aid training
 
-IMPORTANT: This app does not replace professional first aid training and is intended as a training tool only. Always call emergency services in real emergencies!
+IMPORTANT: This app does not replace professional first aid training and is intended as a training tool only. Always call emergency services (911/112) in real emergencies!
 ```
 
-## Veröffentlichungsprozess
+## Publishing Process
 
-### Schritt 1: App im Connect IQ Store Manager hochladen
+### Step 1: Upload App to Connect IQ Store Manager
 
-1. Gehe zu: https://apps.garmin.com/developer/
-2. Klicke auf "Apps" → "Upload an App"
-3. Wähle "Watch App" als App-Typ
+1. Go to: https://apps.garmin.com/developer/
+2. Click "Apps" → "Upload an App"
+3. Select "Watch App" as app type
 
-### Schritt 2: App-Informationen eingeben
+### Step 2: Enter App Information
 
 #### Basic Information
 - **App Name:** CPR Trainer
 - **Version:** 1.0.0
-- **Summary:** CPR-Trainingsapp basierend auf ERC Guidelines 2025
+- **Summary:** CPR training app based on ERC Guidelines 2025
 - **Category:** Health & Fitness
 - **Subcategory:** Training
-- **Languages:** German, English
+- **Languages:** English, German (optional)
 
 #### Detailed Information
-- Füge die oben vorbereitete Beschreibung ein (Deutsch & Englisch)
-- **Keywords:** CPR, Herz-Lungen-Wiederbelebung, Erste Hilfe, Herzdruckmassage, Reanimation, ERC, Training, First Aid, Resuscitation
-- **Support Email:** [deine E-Mail]
-- **Privacy Policy URL:** (optional, aber empfohlen)
+- Add the prepared description above
+- **Keywords:** CPR, cardiopulmonary resuscitation, first aid, chest compression, resuscitation, ERC, training, emergency
+- **Support Email:** [your email]
+- **Privacy Policy URL:** (optional but recommended)
 - **Website URL:** (optional)
 
 #### Pricing
-- **Free** (empfohlen für erste Version)
-- Alternativ: Paid ($1.99 - $4.99)
+- **Free** (recommended for first version)
+- Alternative: Paid ($1.99 - $4.99)
 
-### Schritt 3: App Binary hochladen
+### Step 3: Upload App Binary
 
-1. Klicke auf "Upload Binary"
-2. Wähle die kompilierte `.iq` Datei (nicht `.prg`!)
+1. Click "Upload Binary"
+2. Select compiled `.iq` file (not `.prg`!)
 
-**Wichtig:** Für den Store brauchst du eine `.iq` Datei:
+**Important:** For the store you need a `.iq` file:
 ```bash
-# Kompiliere für Store-Veröffentlichung
+# Compile for store release
 monkeyc -o bin/CPRTrainer.iq -f monkey.jungle -y developer_key.der -r
 ```
 
-Die `-r` Flag erstellt eine Release-Build.
+The `-r` flag creates a release build.
 
-### Schritt 4: Screenshots hochladen
+### Step 4: Upload Screenshots
 
-1. Lade 2-5 Screenshots hoch
-2. Ordne sie in gewünschter Reihenfolge an
-3. Füge Beschreibungen hinzu (optional)
+1. Upload 2-5 screenshots
+2. Arrange in desired order
+3. Add descriptions (optional)
 
-### Schritt 5: Gerätekompatibilität auswählen
+### Step 5: Select Device Compatibility
 
-- Wähle alle Geräte aus, die in deiner `manifest.xml` gelistet sind
-- Empfehlung: Teste mindestens auf 2-3 Geräten vor Veröffentlichung
+- Select all devices listed in your `manifest.xml`
+- Recommendation: Test on at least 2-3 devices before release
 
-### Schritt 6: Beta-Testing (Optional aber empfohlen)
+### Step 6: Beta Testing (Optional but recommended)
 
-1. Aktiviere "Beta Testing"
-2. Wähle "Closed Beta" oder "Open Beta"
-3. Teile den Beta-Link mit Testern
-4. Sammle Feedback für 1-2 Wochen
-5. Behebe Bugs basierend auf Feedback
+1. Enable "Beta Testing"
+2. Choose "Closed Beta" or "Open Beta"
+3. Share beta link with testers
+4. Collect feedback for 1-2 weeks
+5. Fix bugs based on feedback
 
-### Schritt 7: Submit for Review
+### Step 7: Submit for Review
 
-1. Überprüfe alle Informationen
-2. Akzeptiere die Store Agreement
-3. Klicke auf "Submit for Review"
+1. Review all information
+2. Accept Store Agreement
+3. Click "Submit for Review"
 
-## Review-Prozess
+## Review Process
 
-### Was Garmin prüft:
-- ✓ App startet ohne Crashes
-- ✓ App funktioniert wie beschrieben
-- ✓ Keine Richtlinienverstöße
-- ✓ Angemessene Ressourcennutzung (Batterie, Speicher)
-- ✓ Benutzerfreundlichkeit
+### What Garmin checks:
+- ✓ App starts without crashes
+- ✓ App functions as described
+- ✓ No policy violations
+- ✓ Reasonable resource usage (battery, memory)
+- ✓ User-friendliness
 
-### Dauer:
-- Normalerweise **3-7 Werktage**
-- Bei Problemen: Garmin sendet Feedback mit Verbesserungsvorschlägen
+### Duration:
+- Usually **3-7 business days**
+- If issues: Garmin sends feedback with improvement suggestions
 
-### Häufige Ablehnungsgründe:
-- App crasht beim Testen
-- Beschreibung entspricht nicht der Funktionalität
-- Unzureichende Screenshots
-- Zu hoher Batterieverbrauch
-- Medizinische Claims ohne Disclaimer
+### Common rejection reasons:
+- App crashes during testing
+- Description doesn't match functionality
+- Insufficient screenshots
+- Too high battery consumption
+- Medical claims without disclaimer
 
-## Nach der Veröffentlichung
+## After Publication
 
-### App ist live! 🎉
+### App is live! 🎉
 
-Deine App ist jetzt unter diesem Link erreichbar:
+Your app is now available at:
 ```
 https://apps.garmin.com/apps/[APP_ID]
 ```
 
 ### Promotion
 
-**Kostenlose Wege:**
-1. **Social Media:** Teile den Link auf Twitter, LinkedIn, Facebook
-2. **Foren:** Poste in Garmin-Foren und Erste-Hilfe-Communities
+**Free methods:**
+1. **Social Media:** Share link on Twitter, LinkedIn, Facebook
+2. **Forums:** Post in Garmin forums and first aid communities
 3. **Reddit:** r/Garmin, r/firstaid
-4. **YouTube:** Erstelle ein Tutorial-Video
-5. **Ersthelfer-Organisationen:** Kontaktiere DRK, Johanniter, etc.
+4. **YouTube:** Create tutorial video
+5. **First Aid Organizations:** Contact Red Cross, St. John Ambulance, etc.
 
-**Bezahlte Promotion (optional):**
-- Google Ads für "CPR Training App"
+**Paid Promotion (optional):**
+- Google Ads for "CPR Training App"
 - Facebook/Instagram Ads
-- Influencer Marketing (Erste-Hilfe-Trainer)
+- Influencer Marketing (first aid trainers)
 
-### Updates veröffentlichen
+### Publish Updates
 
-#### Versionsnummering:
+#### Version Numbering:
 - **1.0.1** - Bugfixes
-- **1.1.0** - Neue Features
-- **2.0.0** - Große Änderungen
+- **1.1.0** - New features
+- **2.0.0** - Major changes
 
-#### Update-Prozess:
-1. Erhöhe Version in `manifest.xml`
-2. Kompiliere neue `.iq` Datei
-3. Gehe zum App Manager → "Upload New Version"
-4. Füge Release Notes hinzu
+#### Update Process:
+1. Increase version in `manifest.xml`
+2. Compile new `.iq` file
+3. Go to App Manager → "Upload New Version"
+4. Add release notes
 5. Submit for Review
 
 ### Analytics & Feedback
 
-**Im Connect IQ App Manager:**
-- Download-Zahlen
-- Aktive Nutzer
-- Bewertungen & Reviews
-- Crash-Reports
+**In Connect IQ App Manager:**
+- Download numbers
+- Active users
+- Ratings & reviews
+- Crash reports
 
-**Auf Feedback reagieren:**
-- Beantworte Bewertungen
-- Behebe gemeldete Bugs schnell
-- Implementiere Feature-Requests
+**Respond to Feedback:**
+- Answer reviews
+- Fix reported bugs quickly
+- Implement feature requests
 
-## Rechtliche Hinweise
+## Legal Notes
 
-### Haftungsausschluss (wichtig!)
+### Disclaimer (important!)
 
-**In der App-Beschreibung immer klarstellen:**
+**Always clarify in app description:**
 ```
-HAFTUNGSAUSSCHLUSS: Diese App ist nur ein Trainingstool und ersetzt
-keine professionelle Erste-Hilfe-Ausbildung. Im Notfall immer 112
-rufen! Keine Haftung für medizinische Folgen.
+DISCLAIMER: This app is a training tool only and does not replace
+professional first aid training. Always call emergency services
+(911/112) in real emergencies! No liability for medical consequences.
 ```
 
-### Datenschutz
+### Privacy
 
-Wenn du persönliche Daten sammelst:
-- Erstelle eine Privacy Policy
-- Halte dich an DSGVO (EU)
-- Sei transparent über Datennutzung
+If you collect personal data:
+- Create a Privacy Policy
+- Comply with GDPR (EU) / CCPA (USA)
+- Be transparent about data usage
 
-Diese App sammelt **keine** persönlichen Daten.
+This app collects **no** personal data.
 
-### Medizinprodukt-Zulassung
+### Medical Device Approval
 
-Diese App ist **kein Medizinprodukt** da sie:
-- Nur zum Training gedacht ist
-- Keine medizinischen Diagnosen stellt
-- Nicht zur Behandlung eingesetzt wird
+This app is **NOT a medical device** because it:
+- Is intended for training only
+- Makes no medical diagnoses
+- Is not used for treatment
 
-Falls du dies änderst, brauchst du ggf. CE-Kennzeichnung (EU) oder FDA-Approval (USA)!
+If you change this, you may need CE marking (EU) or FDA approval (USA)!
 
 ## Support & Community
 
-### Support anbieten
+### Offer Support
 
-**Erstelle eine Support-Email:**
-- support@[dein-domain].de
-- Oder nutze GitHub Issues
+**Create support email:**
+- support@[your-domain].com
+- Or use GitHub Issues
 
-**FAQ erstellen:**
-- Wie starte ich die App?
-- Funktioniert auf meinem Gerät?
-- Wie aktualisiere ich?
+**Create FAQ:**
+- How do I start the app?
+- Does it work on my device?
+- How do I update?
 
-### Community aufbauen
+### Build Community
 
-- GitHub: Erlaube Contributions
-- Discord/Slack: Community-Channel
-- Newsletter: Updates & Tipps
+- GitHub: Allow contributions
+- Discord/Slack: Community channel
+- Newsletter: Updates & tips
 
-## Monetarisierung (optional)
+## Monetization (optional)
 
-### Kostenlos mit Spenden
-- "Buy me a coffee" Link
+### Free with Donations
+- "Buy me a coffee" link
 - PayPal Donate
 - Ko-fi
 
 ### Paid App
-- Einmalzahlung ($1.99 - $4.99)
-- Keine In-App-Käufe möglich bei Garmin
+- One-time payment ($1.99 - $4.99)
+- No in-app purchases possible with Garmin
 
 ### Premium Features
-- Basis-Version kostenlos
-- Separate "Pro" Version mit erweiterten Features:
-  - Verschiedene CPR-Modi (Baby, Kind, Erwachsener)
-  - Detaillierte Statistiken
-  - Exportfunktion
+- Basic version free
+- Separate "Pro" version with extended features:
+  - Different CPR modes (infant, child, adult)
+  - Detailed statistics
+  - Export function
 
-## Erfolgsmetriken
+## Success Metrics
 
-**Nach 1 Monat:**
-- [ ] 100+ Downloads
-- [ ] 10+ Bewertungen
-- [ ] Durchschnitt 4+ Sterne
+**After 1 month:**
+- [ ] 100+ downloads
+- [ ] 10+ reviews
+- [ ] Average 4+ stars
 
-**Nach 6 Monaten:**
-- [ ] 1000+ Downloads
-- [ ] 50+ Bewertungen
+**After 6 months:**
+- [ ] 1000+ downloads
+- [ ] 50+ reviews
 - [ ] Featured in "Health & Fitness"
 
-**Nach 1 Jahr:**
-- [ ] 5000+ Downloads
-- [ ] Partner mit Erste-Hilfe-Organisationen
-- [ ] Version 2.0 mit erweiterten Features
+**After 1 year:**
+- [ ] 5000+ downloads
+- [ ] Partnerships with first aid organizations
+- [ ] Version 2.0 with extended features
 
-## Weiterführende Ressourcen
+## Further Resources
 
 - **Garmin Developer Forum:** https://forums.garmin.com/developer/
-- **Connect IQ Dokumentation:** https://developer.garmin.com/connect-iq/
+- **Connect IQ Documentation:** https://developer.garmin.com/connect-iq/
 - **Monkey C API Docs:** https://developer.garmin.com/connect-iq/api-docs/
 - **Best Practices:** https://developer.garmin.com/connect-iq/connect-iq-basics/
 
 ---
 
-**Viel Erfolg mit der Veröffentlichung! 🚀**
+**Good luck with publication! 🚀**
 
-Bei Fragen oder Problemen: Öffne ein Issue auf GitHub oder kontaktiere die Garmin Developer Community.
+For questions or issues: Open an issue on GitHub or contact the Garmin Developer Community.

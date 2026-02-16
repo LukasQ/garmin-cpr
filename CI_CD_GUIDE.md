@@ -1,198 +1,198 @@
-# CI/CD Pipeline Guide für CPR Trainer
+# CI/CD Pipeline Guide for CPR Trainer
 
-## 🚀 Übersicht
+## 🚀 Overview
 
-Dieses Projekt nutzt **GitHub Actions** für kontinuierliche Integration und Deployment. Alle Pipelines sind **kostenlos** für öffentliche Repositories.
+This project uses **GitHub Actions** for continuous integration and deployment. All pipelines are **free** for public repositories.
 
-## 📋 Verfügbare Workflows
+## 📋 Available Workflows
 
 ### 1. **Build and Test** (`build.yml`)
-- **Trigger:** Push auf `main` oder `develop`, Pull Requests
-- **Läuft:** ~5-8 Minuten
-- **Kosten:** Kostenlos (öffentliches Repo)
+- **Trigger:** Push to `main` or `develop`, Pull Requests
+- **Runtime:** ~5-8 minutes
+- **Cost:** Free (public repo)
 
-**Was es macht:**
-- ✅ Kompiliert die App für Fenix 7, Venu 2, Forerunner 955
-- ✅ Führt Code-Quality-Checks durch
-- ✅ Validiert Dokumentation
-- ✅ Lädt Build-Artifacts hoch (30 Tage)
+**What it does:**
+- ✅ Compiles app for Fenix 7, Venu 2, Forerunner 955
+- ✅ Runs code quality checks
+- ✅ Validates documentation
+- ✅ Uploads build artifacts (30 days)
 
 **Artifacts:**
-- `cpr-trainer-builds` - .prg Dateien zum Testen
+- `cpr-trainer-builds` - .prg files for testing
 
 ### 2. **Release** (`release.yml`)
-- **Trigger:** Git Tags mit Pattern `v*.*.*` (z.B. `v1.0.0`)
-- **Läuft:** ~10-15 Minuten
-- **Kosten:** Kostenlos (öffentliches Repo)
+- **Trigger:** Git tags with pattern `v*.*.*` (e.g., `v1.0.0`)
+- **Runtime:** ~10-15 minutes
+- **Cost:** Free (public repo)
 
-**Was es macht:**
-- ✅ Kompiliert für ALLE 17+ unterstützten Geräte
-- ✅ Erstellt universelle .iq Datei für Connect IQ Store
-- ✅ Erstellt ZIP mit allen .prg Dateien
-- ✅ Generiert SHA256 Checksums
-- ✅ Erstellt automatisch GitHub Release mit Release Notes
+**What it does:**
+- ✅ Compiles for ALL 17+ supported devices
+- ✅ Creates universal .iq file for Connect IQ Store
+- ✅ Creates ZIP with all .prg files
+- ✅ Generates SHA256 checksums
+- ✅ Automatically creates GitHub Release with notes
 
 **Release Assets:**
-- `CPRTrainer-vX.X.X.iq` - Für Connect IQ Store
-- `CPRTrainer-AllDevices-vX.X.X.zip` - Alle .prg Dateien
-- `BUILD_INFO.txt` - Build-Informationen
+- `CPRTrainer-vX.X.X.iq` - For Connect IQ Store
+- `CPRTrainer-AllDevices-vX.X.X.zip` - All .prg files
+- `BUILD_INFO.txt` - Build information
 - `SHA256SUMS.txt` - Checksums
 
 ### 3. **Pull Request Checks** (`pr-check.yml`)
 - **Trigger:** Pull Requests (opened, synchronize, reopened)
-- **Läuft:** ~3-5 Minuten
-- **Kosten:** Kostenlos
+- **Runtime:** ~3-5 minutes
+- **Cost:** Free
 
-**Was es macht:**
-- ✅ Validiert PR-Titel (Conventional Commits)
-- ✅ Prüft auf DISCLAIMER.md Änderungen (warnt)
-- ✅ Checkt manifest.xml Version-Bump
-- ✅ Sucht nach neuen TODO/FIXME Kommentaren
-- ✅ Prüft auf große Dateien (>1MB)
-- ✅ Validiert geänderte Monkey C Dateien
-- ✅ Test-Build für Fenix 7
+**What it does:**
+- ✅ Validates PR title (Conventional Commits)
+- ✅ Checks for DISCLAIMER.md changes (warns)
+- ✅ Checks manifest.xml version bump
+- ✅ Searches for new TODO/FIXME comments
+- ✅ Checks for large files (>1MB)
+- ✅ Validates changed Monkey C files
+- ✅ Test build for Fenix 7
 
 ### 4. **Nightly Build** (`nightly.yml`)
-- **Trigger:** Täglich um 2 Uhr UTC, oder manuell
-- **Läuft:** ~15-20 Minuten
-- **Kosten:** Kostenlos
+- **Trigger:** Daily at 2 AM UTC, or manual
+- **Runtime:** ~15-20 minutes
+- **Cost:** Free
 
-**Was es macht:**
-- ✅ Kompiliert für ALLE unterstützten Geräte
-- ✅ Erstellt Kompatibilitäts-Report
-- ✅ Lädt Build-Logs hoch (7 Tage)
-- ✅ Warnt bei Fehlern
+**What it does:**
+- ✅ Compiles for ALL supported devices
+- ✅ Creates compatibility report
+- ✅ Uploads build logs (7 days)
+- ✅ Warns on failures
 
 ---
 
-## 🎯 Wie verwende ich die Pipelines?
+## 🎯 How to Use the Pipelines
 
-### Als Entwickler (während der Entwicklung)
+### As Developer (During Development)
 
-#### 1. Feature entwickeln
+#### 1. Develop Feature
 ```bash
 git checkout -b feature/my-new-feature
-# ... Code schreiben ...
+# ... write code ...
 git add .
 git commit -m "feat(sensor): add xyz"
 git push origin feature/my-new-feature
 ```
 
-#### 2. Pull Request erstellen
-- Gehe zu GitHub → Pull Requests → New Pull Request
-- Fülle das PR-Template aus
-- **Automatisch:** PR-Checks laufen los
-- Warte auf grünes Häkchen ✅
+#### 2. Create Pull Request
+- Go to GitHub → Pull Requests → New Pull Request
+- Fill out PR template
+- **Automatically:** PR checks run
+- Wait for green checkmark ✅
 
-#### 3. Nach Merge in main
-- **Automatisch:** Build & Test Workflow läuft
-- **Automatisch:** Artifacts werden erstellt
+#### 3. After Merge to Main
+- **Automatically:** Build & Test workflow runs
+- **Automatically:** Artifacts created
 
-### Als Maintainer (Release erstellen)
+### As Maintainer (Create Release)
 
-#### 1. Version vorbereiten
+#### 1. Prepare Version
 ```bash
-# Version in manifest.xml erhöhen
+# Increase version in manifest.xml
 vim manifest.xml
-# Ändere: version="1.0.0" → version="1.0.1"
+# Change: version="1.0.0" → version="1.0.1"
 
 git add manifest.xml
 git commit -m "chore: bump version to 1.0.1"
 git push origin main
 ```
 
-#### 2. Git Tag erstellen
+#### 2. Create Git Tag
 ```bash
 git tag v1.0.1
 git push origin v1.0.1
 ```
 
-#### 3. Release-Workflow startet automatisch
-- Kompiliert für alle Geräte
-- Erstellt .iq und .zip Dateien
-- Erstellt GitHub Release
-- Release Notes werden generiert
+#### 3. Release Workflow Starts Automatically
+- Compiles for all devices
+- Creates .iq and .zip files
+- Creates GitHub Release
+- Release notes generated
 
-#### 4. Release veröffentlichen
-- Gehe zu GitHub → Releases
-- Release ist automatisch erstellt (Draft = false)
-- Bei Bedarf Release Notes anpassen
-- Download-Links sind verfügbar
+#### 4. Publish Release
+- Go to GitHub → Releases
+- Release automatically created (Draft = false)
+- Edit release notes if needed
+- Download links available
 
 ---
 
-## 💰 Kosten-Übersicht
+## 💰 Cost Overview
 
-### GitHub Actions Free Tier (Öffentliches Repo)
+### GitHub Actions Free Tier (Public Repo)
 
-| Feature | Free Tier | Dein Verbrauch |
-|---------|-----------|----------------|
-| **Minuten/Monat** | Unbegrenzt | ~100-200 min/Monat |
+| Feature | Free Tier | Your Usage |
+|---------|-----------|------------|
+| **Minutes/Month** | Unlimited | ~100-200 min/month |
 | **Concurrent Jobs** | 20 | Max. 4 (workflows) |
 | **Storage** | 500 MB | ~10-20 MB |
-| **Artifact Retention** | 90 Tage | 7-30 Tage konfiguriert |
+| **Artifact Retention** | 90 days | 7-30 days configured |
 
-**Kosten:** **0 EUR / Monat** 🎉
+**Cost:** **$0 USD / Month** 🎉
 
-### Für Private Repositories
+### For Private Repositories
 
-Wenn du das Repo privat machst:
+If you make the repo private:
 
-| Account Typ | Free Minutes | Preis danach |
-|-------------|--------------|--------------|
-| **Free** | 2000 min/Monat | $0.008/min |
-| **Pro** | 3000 min/Monat | $0.008/min |
-| **Team** | 3000 min/Monat | $0.008/min |
+| Account Type | Free Minutes | Price After |
+|--------------|--------------|-------------|
+| **Free** | 2000 min/month | $0.008/min |
+| **Pro** | 3000 min/month | $0.008/min |
+| **Team** | 3000 min/month | $0.008/min |
 
-**Dein Verbrauch:** ~100-200 min/Monat
-→ **Passt locker in Free Tier!** ✅
+**Your usage:** ~100-200 min/month
+→ **Fits easily in Free Tier!** ✅
 
 ---
 
-## 🔧 Konfiguration anpassen
+## 🔧 Customize Configuration
 
-### Connect IQ SDK Version ändern
+### Change Connect IQ SDK Version
 
-In allen Workflow-Dateien:
+In all workflow files:
 ```yaml
-# Ändere diese URL:
+# Change this URL:
 wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.2.1.zip
 
-# Zu neuerer Version:
+# To newer version:
 wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-7.3.0.zip
 ```
 
-Und Cache-Key aktualisieren:
+And update cache key:
 ```yaml
-key: ${{ runner.os }}-connectiq-sdk-7.3.0  # Version anpassen
+key: ${{ runner.os }}-connectiq-sdk-7.3.0  # Update version
 ```
 
-### Artifact Retention ändern
+### Change Artifact Retention
 
 ```yaml
 - uses: actions/upload-artifact@v3
   with:
-    retention-days: 30  # Ändere: 1-90 Tage
+    retention-days: 30  # Change: 1-90 days
 ```
 
-### Nightly Build Zeit ändern
+### Change Nightly Build Time
 
 ```yaml
 schedule:
-  - cron: '0 2 * * *'  # Format: Minute Stunde Tag Monat Wochentag
-  # Beispiele:
-  # '0 0 * * *'  = Mitternacht UTC
-  # '0 12 * * *' = 12 Uhr Mittags UTC
-  # '0 0 * * 1'  = Jeden Montag Mitternacht
+  - cron: '0 2 * * *'  # Format: Minute Hour Day Month Weekday
+  # Examples:
+  # '0 0 * * *'  = Midnight UTC
+  # '0 12 * * *' = 12 PM UTC
+  # '0 0 * * 1'  = Every Monday midnight
 ```
 
-### Weitere Geräte hinzufügen
+### Add More Devices
 
 In `release.yml`:
 ```yaml
 DEVICES=(
   "fenix7:Fenix7"
-  "dein_neues_geraet:NeuesGeraet"  # Hinzufügen
+  "your_new_device:NewDevice"  # Add here
 )
 ```
 
@@ -200,63 +200,80 @@ DEVICES=(
 
 ## 🐛 Troubleshooting
 
-### Build schlägt fehl: "monkeyc: command not found"
+### Build fails: "monkeyc: command not found"
 
-**Problem:** SDK nicht korrekt installiert
+**Problem:** SDK not correctly installed
 
-**Lösung:**
+**Solution:**
 ```yaml
-# Prüfe SDK-Download-URL
-# Manchmal ändert Garmin die URLs
-# Aktuellste URL von developer.garmin.com holen
+# Check SDK download URL
+# Sometimes Garmin changes URLs
+# Get latest URL from developer.garmin.com
 ```
 
-### Release wird nicht erstellt
+### Release not created
 
-**Problem:** Git Tag nicht korrekt
+**Problem:** Git tag not correct
 
-**Lösung:**
+**Solution:**
 ```bash
-# Tag muss mit 'v' beginnen und Semantic Versioning folgen
-git tag v1.0.0  # ✅ Korrekt
-git tag 1.0.0   # ❌ Falsch (fehlt 'v')
-git tag release-1.0.0  # ❌ Falsch (wrong pattern)
+# Tag must start with 'v' and follow Semantic Versioning
+git tag v1.0.0  # ✅ Correct
+git tag 1.0.0   # ❌ Wrong (missing 'v')
+git tag release-1.0.0  # ❌ Wrong (wrong pattern)
 ```
 
-### Cache wird nicht genutzt
+### Cache not used
 
-**Problem:** Cache-Key hat sich geändert
+**Problem:** Cache key changed
 
-**Lösung:**
+**Solution:**
 ```bash
-# Lösche alte Caches manuell:
+# Delete old caches manually:
 # GitHub Repo → Actions → Caches → Delete Cache
 
-# Oder warte 7 Tage (automatische Löschung)
+# Or wait 7 days (automatic deletion)
 ```
 
-### Artifact Upload schlägt fehl
+### Deprecated action versions
 
-**Problem:** Zu groß oder zu viele Dateien
+**Problem:** GitHub shows deprecation warnings
 
-**Lösung:**
-```yaml
-# Filtere genauer:
-path: bin/*.prg  # Nur .prg Dateien
-# Statt:
-path: bin/       # Alle Dateien
-```
-
-### Workflow läuft nicht
-
-**Problem:** Workflow-Datei Syntax-Fehler
-
-**Lösung:**
+**Solution:**
 ```bash
-# Validiere YAML Syntax online:
+# Check for updates regularly
+# Run the versions-check workflow:
+# GitHub Actions → versions-check → Run workflow
+
+# Update to latest versions:
+# - actions/checkout@v4 (latest)
+# - actions/cache@v4 (latest)
+# - actions/upload-artifact@v4 (latest)
+# - softprops/action-gh-release@v2 (latest)
+```
+
+### Artifact upload fails
+
+**Problem:** Too large or too many files
+
+**Solution:**
+```yaml
+# Filter more precisely:
+path: bin/*.prg  # Only .prg files
+# Instead of:
+path: bin/       # All files
+```
+
+### Workflow doesn't run
+
+**Problem:** Workflow file syntax error
+
+**Solution:**
+```bash
+# Validate YAML syntax online:
 # https://www.yamllint.com/
 
-# Oder lokal:
+# Or locally:
 pip install yamllint
 yamllint .github/workflows/build.yml
 ```
@@ -265,20 +282,20 @@ yamllint .github/workflows/build.yml
 
 ## 📊 Monitoring & Logs
 
-### Workflow-Status sehen
+### View Workflow Status
 
-1. Gehe zu: GitHub Repo → **Actions** Tab
-2. Sieh alle Workflow-Runs
-3. Klicke auf einen Run für Details
-4. Klicke auf einen Job für Logs
+1. Go to: GitHub Repo → **Actions** tab
+2. See all workflow runs
+3. Click on a run for details
+4. Click on a job for logs
 
-### Artifacts herunterladen
+### Download Artifacts
 
-1. Gehe zu: Actions → Workflow Run
-2. Scrolle runter zu "Artifacts"
-3. Klicke auf Artifact-Name zum Download
+1. Go to: Actions → Workflow Run
+2. Scroll down to "Artifacts"
+3. Click artifact name to download
 
-### Badges hinzufügen
+### Add Badges
 
 In README.md:
 ```markdown
@@ -290,18 +307,18 @@ In README.md:
 
 ## 🔐 Secrets & Permissions
 
-### Benötigte Secrets
+### Required Secrets
 
-**Keine!** 🎉
+**None!** 🎉
 
-Alle Workflows nutzen nur:
-- `GITHUB_TOKEN` - Automatisch verfügbar
-- Öffentliche URLs (SDK Download)
+All workflows only use:
+- `GITHUB_TOKEN` - Automatically available
+- Public URLs (SDK download)
 
 ### Permissions
 
-Workflows haben nur Lese-Zugriff, außer:
-- `release.yml` - Benötigt `contents: write` für Releases
+Workflows have read-only access, except:
+- `release.yml` - Requires `contents: write` for releases
 
 ---
 
@@ -309,7 +326,7 @@ Workflows haben nur Lese-Zugriff, außer:
 
 ### 1. Branch Protection
 
-Schütze `main` Branch:
+Protect `main` branch:
 ```
 Settings → Branches → Add Rule
 - Branch name pattern: main
@@ -321,7 +338,7 @@ Settings → Branches → Add Rule
 
 ### 2. Conventional Commits
 
-Nutze semantische Commit-Messages:
+Use semantic commit messages:
 ```bash
 feat(sensor): add heart rate monitoring
 fix(ui): correct compression counter display
@@ -331,44 +348,44 @@ chore: bump version to 1.0.1
 
 ### 3. Semantic Versioning
 
-Folge SemVer für Tags:
+Follow SemVer for tags:
 - `v1.0.0` → Major.Minor.Patch
-- `v1.0.1` → Patch (Bugfix)
-- `v1.1.0` → Minor (neues Feature)
-- `v2.0.0` → Major (Breaking Change)
+- `v1.0.1` → Patch (bugfix)
+- `v1.1.0` → Minor (new feature)
+- `v2.0.0` → Major (breaking change)
 
-### 4. Changelog pflegen
+### 4. Maintain Changelog
 
-Erstelle `CHANGELOG.md`:
+Create `CHANGELOG.md`:
 ```markdown
 # Changelog
 
 ## [1.0.1] - 2026-02-16
 ### Fixed
-- Drucktiefe-Sensor Kalibrierung verbessert
+- Improved depth sensor calibration
 
 ## [1.0.0] - 2026-02-15
 ### Added
-- Initial Release
-- 110 BPM Rhythmus
-- Drucktiefe-Messung
+- Initial release
+- 110 BPM rhythm
+- Depth measurement
 ```
 
 ---
 
 ## 📞 Support
 
-Bei Problemen:
-1. 📖 Lies diese Anleitung
-2. 🔍 Prüfe [GitHub Actions Logs](https://github.com/[username]/garmin-cpr/actions)
-3. 🐛 Erstelle ein [Issue](https://github.com/[username]/garmin-cpr/issues)
-4. 💬 Frage in [Discussions](https://github.com/[username]/garmin-cpr/discussions)
+For issues:
+1. 📖 Read this guide
+2. 🔍 Check [GitHub Actions Logs](https://github.com/[username]/garmin-cpr/actions)
+3. 🐛 Create an [Issue](https://github.com/[username]/garmin-cpr/issues)
+4. 💬 Ask in [Discussions](https://github.com/[username]/garmin-cpr/discussions)
 
 ---
 
-## 📚 Weitere Ressourcen
+## 📚 Further Resources
 
-- [GitHub Actions Dokumentation](https://docs.github.com/en/actions)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Garmin Connect IQ Developer Guide](https://developer.garmin.com/connect-iq/)
 - [YAML Syntax](https://yaml.org/)
 - [Semantic Versioning](https://semver.org/)

@@ -26,7 +26,7 @@ jobs:
 
     - name: Cache Connect IQ SDK
       id: cache-sdk
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/connectiq-sdk
         key: ${{ runner.os }}-connectiq-sdk-7.2.1
@@ -202,7 +202,7 @@ jobs:
         EOF
 
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: |
           release/*

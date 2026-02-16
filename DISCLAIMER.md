@@ -1,252 +1,252 @@
-# Haftungsausschluss und Nutzungsbedingungen
+# Liability Disclaimer and Terms of Use
 # CPR Trainer - Garmin Watch App
 
-**Letzte Aktualisierung:** Februar 2026
+**Last Updated:** February 2026
 
 ---
 
-## 1. Allgemeiner Haftungsausschluss
+## 1. General Disclaimer
 
-### 1.1 Keine medizinische Verantwortung
+### 1.1 No Medical Responsibility
 
-**DIESE APP IST EIN HILFSMITTEL ZUR UNTERSTÜTZUNG GESCHULTER ERSTHELFER UND ERSETZT KEINE MEDIZINISCHE AUSBILDUNG.**
+**THIS APP IS A SUPPORT TOOL FOR TRAINED FIRST RESPONDERS AND DOES NOT REPLACE MEDICAL TRAINING.**
 
-Die Entwickler, Mitwirkenden und Verteiler dieser Software übernehmen **KEINE Verantwortung** für:
+The developers, contributors, and distributors of this software assume **NO responsibility** for:
 
-- ❌ Den Ausgang einer Reanimation
-- ❌ Medizinische Komplikationen während oder nach CPR
-- ❌ Verletzungen des Patienten oder des Helfers
-- ❌ Fehlerhafte, ungenaue oder verzögerte Messungen
-- ❌ Technische Fehlfunktionen der App oder der Garmin-Hardware
-- ❌ Unsachgemäße Anwendung der CPR-Technik
-- ❌ Verzögerungen in der Notfallversorgung
-- ❌ Folgeschäden jeglicher Art (direkt, indirekt, zufällig)
+- ❌ The outcome of a resuscitation
+- ❌ Medical complications during or after CPR
+- ❌ Injuries to the patient or responder
+- ❌ Incorrect, inaccurate, or delayed measurements
+- ❌ Technical malfunctions of the app or Garmin hardware
+- ❌ Improper application of CPR technique
+- ❌ Delays in emergency care
+- ❌ Consequential damages of any kind (direct, indirect, incidental)
 
-### 1.2 Keine Garantie
+### 1.2 No Warranty
 
-Diese Software wird bereitgestellt **"WIE BESEHEN"** ohne jegliche ausdrückliche oder stillschweigende Gewährleistung, einschließlich, aber nicht beschränkt auf:
+This software is provided **"AS IS"** without any express or implied warranty, including but not limited to:
 
-- Die Gewährleistung der Marktgängigkeit
-- Die Eignung für einen bestimmten Zweck
-- Die Nichtverletzung von Rechten Dritter
-- Die Genauigkeit oder Zuverlässigkeit von Messungen
-- Die Verfügbarkeit oder Fehlerfreiheit der Software
-
----
-
-## 2. Zielgruppe und Verwendungszweck
-
-### 2.1 Nur für geschulte Ersthelfer
-
-Diese App ist ausschließlich gedacht für:
-
-✅ **Personen mit abgeschlossener Erste-Hilfe-Ausbildung**
-✅ **Personen mit CPR-Training** (z.B. Führerschein-Erste-Hilfe-Kurs)
-✅ **Medizinisches Personal** zur Auffrischung
-✅ **Rettungsdienst-Personal** als zusätzliches Tool
-
-❌ **NICHT geeignet für:**
-- Personen ohne jegliche Erste-Hilfe-Ausbildung
-- Erstmalige CPR-Schulung ohne Instruktor
-- Kinder oder Jugendliche ohne Aufsicht
-- Ersatz für professionelle medizinische Ausbildung
-
-### 2.2 Nur für Trainingszwecke
-
-Die App ist primär ein **Trainings- und Übungstool**:
-
-✅ Training mit CPR-Übungspuppen
-✅ Auffrischung erlernter Fähigkeiten
-✅ Selbststudium nach absolviertem Kurs
-✅ Rhythmus-Unterstützung für geübte Helfer
-
-❌ **Die App ersetzt NICHT:**
-- Einen offiziellen Erste-Hilfe-Kurs
-- Die Anweisungen eines Notrufdisponenten
-- Professionelle medizinische Geräte
-- Medizinisch zertifizierte CPR-Feedback-Systeme
-- Ärztliche Beratung oder Diagnose
+- Warranty of merchantability
+- Fitness for a particular purpose
+- Non-infringement of third-party rights
+- Accuracy or reliability of measurements
+- Availability or error-free operation
 
 ---
 
-## 3. Im Notfall: Richtige Vorgehensweise
+## 2. Target Audience and Intended Use
 
-### 3.1 Notruf hat IMMER Priorität
+### 2.1 For Trained First Responders Only
+
+This app is exclusively intended for:
+
+✅ **Persons with completed first aid training**
+✅ **Persons with CPR training** (e.g., driver's license first aid course)
+✅ **Medical personnel** for refresher training
+✅ **Emergency services personnel** as an additional tool
+
+❌ **NOT suitable for:**
+- Persons without any first aid training
+- Initial CPR training without an instructor
+- Children or adolescents without supervision
+- Replacement for professional medical education
+
+### 2.2 Training Purposes Only
+
+The app is primarily a **training and practice tool**:
+
+✅ Training with CPR practice dummies
+✅ Refreshing learned skills
+✅ Self-study after completing a course
+✅ Rhythm support for experienced responders
+
+❌ **The app does NOT replace:**
+- An official first aid course
+- Instructions from emergency dispatcher
+- Professional medical devices
+- Medically certified CPR feedback systems
+- Medical advice or diagnosis
+
+---
+
+## 3. In an Emergency: Proper Procedure
+
+### 3.1 Emergency Call Always Has Priority
 
 ```
-🚨 IM NOTFALL - SOFORTMASSNAHMEN:
+🚨 IN AN EMERGENCY - IMMEDIATE ACTIONS:
 
-1. Prüfen: Bewusstsein, Atmung
-   └─> Keine normale Atmung = NOTFALL
+1. Check: Consciousness, breathing
+   └─> No normal breathing = EMERGENCY
 
-2. Notruf wählen:
-   • 112 (Europa)
-   • 911 (USA/Nordamerika)
-   • Lokale Notrufnummer in anderen Ländern
+2. Call emergency services:
+   • 911 (USA/North America)
+   • 112 (Europe)
+   • Local emergency number in other countries
 
-3. Anweisungen der Leitstelle befolgen
-   └─> Die Leitstelle kann telefonisch anleiten!
+3. Follow dispatcher instructions
+   └─> Dispatcher can provide guidance by phone!
 
-4. Mit CPR beginnen (wenn geschult)
-   └─> Diese App KANN unterstützen
-   └─> Aber: Leitstellenanweisungen haben VORRANG
+4. Begin CPR (if trained)
+   └─> This app CAN assist
+   └─> But: Dispatcher instructions take PRIORITY
 
-5. Nicht aufhören bis:
-   • Rettungsdienst übernimmt
-   • Person zeigt Lebenszeichen
-   • Eigene Erschöpfung
+5. Don't stop until:
+   • Emergency services take over
+   • Person shows signs of life
+   • Own exhaustion
 ```
 
-### 3.2 Diese App ist nur unterstützend
+### 3.2 This App is Only Supportive
 
-**Die App kann helfen mit:**
-- ✓ Rhythmus-Vorgabe (110/min)
-- ✓ Zähl-Hilfe (30:2 Rhythmus)
-- ✓ Feedback zur Drucktiefe (geschätzt)
-- ✓ Erinnerung an Beatmungen
+**The app can help with:**
+- ✓ Rhythm guidance (110/min)
+- ✓ Counting aid (30:2 rhythm)
+- ✓ Depth feedback (estimated)
+- ✓ Breath reminders
 
-**Die App KANN NICHT:**
-- ✗ Medizinische Anweisungen geben
-- ✗ Den Notruf ersetzen
-- ✗ Garantieren, dass CPR korrekt durchgeführt wird
-- ✗ Den Zustand des Patienten überwachen
-- ✗ Erkennen, ob CPR erfolgreich ist
-
----
-
-## 4. Technische Einschränkungen
-
-### 4.1 Drucktiefe-Messung
-
-Die Drucktiefe-Messung via Beschleunigungssensor ist **eine Schätzung**:
-
-⚠️ **Einschränkungen:**
-- Nicht medizinisch zertifiziert
-- Genauigkeit: ±1-2 cm (unter idealen Bedingungen)
-- Abhängig von: Körpergröße, Armhaltung, Untergrund
-- Keine Garantie für korrekte Messungen
-- Kann durch Bewegung, Vibrationen verfälscht werden
-
-⚠️ **Nicht gleichwertig mit:**
-- Professionellen CPR-Feedback-Geräten (z.B. corpuls primeCPR)
-- Medizinisch zertifizierten Sensoren
-- Direkter Druckmessung am Brustkorb
-
-### 4.2 Software-Einschränkungen
-
-**Keine Gewährleistung für:**
-- ❌ Fehlerfreien Betrieb
-- ❌ Kompatibilität mit allen Garmin-Geräten
-- ❌ Korrekte Funktion unter allen Bedingungen
-- ❌ Echtzeitgenauigkeit der Messungen
-- ❌ Batterielebensdauer während des Einsatzes
-- ❌ Verfügbarkeit von Updates oder Support
-
-### 4.3 Hardware-Abhängigkeit
-
-Die App ist abhängig von:
-- Garmin-Hardware (Uhr, Sensoren)
-- Batterie/Akku-Ladung
-- Korrekte Funktion des Betriebssystems
-- Sensor-Genauigkeit der Uhr
-
-**Bei technischen Problemen:**
-- Verlassen Sie sich NICHT auf die App
-- Führen Sie CPR nach bestem Wissen durch
-- Folgen Sie den Leitstellenanweisungen
+**The app CANNOT:**
+- ✗ Give medical instructions
+- ✗ Replace emergency call
+- ✗ Guarantee correct CPR performance
+- ✗ Monitor patient condition
+- ✗ Detect if CPR is successful
 
 ---
 
-## 5. Keine offizielle Zertifizierung
+## 4. Technical Limitations
 
-### 5.1 Keine medizinische Zulassung
+### 4.1 Depth Measurement
 
-Diese App ist **KEIN Medizinprodukt** gemäß:
+Depth measurement via accelerometer is **an estimate**:
+
+⚠️ **Limitations:**
+- Not medically certified
+- Accuracy: ±1-2 cm (under ideal conditions)
+- Dependent on: body size, arm position, surface
+- No guarantee for correct measurements
+- Can be falsified by movement, vibrations
+
+⚠️ **Not equivalent to:**
+- Professional CPR feedback devices (e.g., corpuls primeCPR)
+- Medically certified sensors
+- Direct pressure measurement on chest
+
+### 4.2 Software Limitations
+
+**No warranty for:**
+- ❌ Error-free operation
+- ❌ Compatibility with all Garmin devices
+- ❌ Correct function under all conditions
+- ❌ Real-time accuracy of measurements
+- ❌ Battery life during use
+- ❌ Availability of updates or support
+
+### 4.3 Hardware Dependency
+
+The app depends on:
+- Garmin hardware (watch, sensors)
+- Battery/charge level
+- Correct functioning of operating system
+- Sensor accuracy of watch
+
+**In case of technical problems:**
+- Do NOT rely on the app
+- Perform CPR to the best of your knowledge
+- Follow dispatcher instructions
+
+---
+
+## 5. No Official Certification
+
+### 5.1 No Medical Approval
+
+This app is **NOT a medical device** according to:
 - EU MDR (Medical Device Regulation 2017/745)
 - FDA (US Food and Drug Administration)
-- CE-Kennzeichnung für Medizinprodukte
+- CE marking for medical devices
 
-**Status:** Consumer-Software für Trainings- und Übungszwecke
+**Status:** Consumer software for training and practice purposes
 
-### 5.2 Keine offizielle Unterstützung
+### 5.2 No Official Support
 
-Diese App ist **NICHT**:
-- Von Garmin offiziell unterstützt oder zertifiziert
-- Von ERC (European Resuscitation Council) akkreditiert
-- Von AHA (American Heart Association) zertifiziert
-- Von medizinischen Fachgesellschaften empfohlen
-- Von Gesundheitsbehörden zugelassen
+This app is **NOT**:
+- Officially supported or certified by Garmin
+- Accredited by ERC (European Resuscitation Council)
+- Certified by AHA (American Heart Association)
+- Recommended by medical societies
+- Approved by health authorities
 
-**Status:** Unabhängiges Open-Source-Projekt
-
----
-
-## 6. Nutzungsbedingungen
-
-### 6.1 Akzeptanz
-
-Durch die Nutzung dieser App akzeptieren Sie:
-
-1. ✓ Dass Sie diesen Haftungsausschluss gelesen und verstanden haben
-2. ✓ Dass Sie die Einschränkungen und Risiken verstehen
-3. ✓ Dass Sie über eine Erste-Hilfe-Ausbildung verfügen (empfohlen)
-4. ✓ Dass Sie die App auf eigenes Risiko nutzen
-5. ✓ Dass die Entwickler keine Haftung übernehmen
-
-### 6.2 Pflichten des Nutzers
-
-Als Nutzer verpflichten Sie sich:
-
-1. ✓ Einen offiziellen Erste-Hilfe-Kurs zu besuchen (wenn noch nicht geschehen)
-2. ✓ Im Notfall **IMMER ZUERST** den Notruf zu wählen
-3. ✓ Die App nur als unterstützendes Tool zu verwenden
-4. ✓ Sich nicht ausschließlich auf die App zu verlassen
-5. ✓ Die App **NICHT** als Ersatz für medizinische Ausbildung zu sehen
-
-### 6.3 Untersagte Verwendung
-
-Sie dürfen die App **NICHT** verwenden:
-
-❌ Als Ersatz für professionelle medizinische Ausbildung
-❌ Als Ersatz für den Notruf
-❌ Ohne jegliche Erste-Hilfe-Kenntnisse
-❌ In medizinischen Einrichtungen als primäres Hilfsmittel
-❌ Als medizinisch zertifiziertes Gerät
-❌ Zur kommerziellen medizinischen Nutzung ohne Genehmigung
+**Status:** Independent open-source project
 
 ---
 
-## 7. Haftungsbeschränkung
+## 6. Terms of Use
 
-### 7.1 Ausschluss jeglicher Haftung
+### 6.1 Acceptance
 
-**IN KEINEM FALL** haften die Entwickler, Mitwirkenden, Verteiler oder Lizenzgeber für:
+By using this app, you accept:
 
-- ❌ Direkte Schäden (Tod, Verletzung, Gesundheitsschäden)
-- ❌ Indirekte Schäden (Folgeschäden, entgangener Gewinn)
-- ❌ Zufällige Schäden
-- ❌ Besondere Schäden
-- ❌ Strafschadensersatz
-- ❌ Schäden durch Datenverlust
-- ❌ Schäden durch Fehlfunktionen
+1. ✓ That you have read and understood this disclaimer
+2. ✓ That you understand the limitations and risks
+3. ✓ That you have first aid training (recommended)
+4. ✓ That you use the app at your own risk
+5. ✓ That the developers assume no liability
 
-**Dies gilt auch wenn:**
-- Die Entwickler über mögliche Schäden informiert wurden
-- Die Schäden vorhersehbar waren
-- Die App fehlerhaft oder ungenau arbeitet
-- Die App gar nicht funktioniert
+### 6.2 User Obligations
 
-### 7.2 Maximale Haftung
+As a user, you commit to:
 
-Falls in Ihrer Jurisdiktion ein vollständiger Haftungsausschluss nicht zulässig ist, ist die Haftung auf den **maximal gesetzlich zulässigen Betrag** beschränkt, der in jedem Fall **0 EUR** nicht übersteigt (da die App kostenlos ist).
+1. ✓ Taking an official first aid course (if not already done)
+2. ✓ **ALWAYS** calling emergency services FIRST in an emergency
+3. ✓ Using the app only as a supportive tool
+4. ✓ Not relying exclusively on the app
+5. ✓ NOT seeing the app as a replacement for medical training
+
+### 6.3 Prohibited Use
+
+You may NOT use the app:
+
+❌ As a replacement for professional medical education
+❌ As a replacement for emergency call
+❌ Without any first aid knowledge
+❌ In medical facilities as primary aid
+❌ As a medically certified device
+❌ For commercial medical use without permission
 
 ---
 
-## 8. Rechtliche Grundlage
+## 7. Limitation of Liability
+
+### 7.1 Exclusion of All Liability
+
+**IN NO EVENT** shall the developers, contributors, distributors, or licensors be liable for:
+
+- ❌ Direct damages (death, injury, health damage)
+- ❌ Indirect damages (consequential damages, lost profits)
+- ❌ Incidental damages
+- ❌ Special damages
+- ❌ Punitive damages
+- ❌ Damages from data loss
+- ❌ Damages from malfunctions
+
+**This applies even if:**
+- Developers were informed of possible damages
+- Damages were foreseeable
+- The app works incorrectly or inaccurately
+- The app doesn't work at all
+
+### 7.2 Maximum Liability
+
+If complete exclusion of liability is not permitted in your jurisdiction, liability is limited to the **maximum legally permissible amount**, which in any case does not exceed **0 USD** (since the app is free).
+
+---
+
+## 8. Legal Basis
 
 ### 8.1 MIT License
 
-Diese Software ist lizenziert unter der MIT License (siehe [LICENSE](LICENSE)):
+This software is licensed under the MIT License (see [LICENSE](LICENSE)):
 
 ```
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
@@ -259,80 +259,80 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-### 8.2 Anwendbares Recht
+### 8.2 Applicable Law
 
-Dieser Haftungsausschluss unterliegt dem Recht der Bundesrepublik Deutschland, soweit nicht zwingende gesetzliche Bestimmungen Ihrer Jurisdiktion entgegenstehen.
+This disclaimer is subject to the laws of the jurisdiction where the app is used, unless mandatory legal provisions of your jurisdiction require otherwise.
 
-### 8.3 Salvatorische Klausel
+### 8.3 Severability Clause
 
-Sollte eine Bestimmung dieses Haftungsausschlusses unwirksam sein, bleiben die übrigen Bestimmungen hiervon unberührt.
-
----
-
-## 9. Empfehlungen
-
-### 9.1 Erste-Hilfe-Ausbildung
-
-**Wir empfehlen dringend:**
-
-✓ Besuchen Sie einen offiziellen Erste-Hilfe-Kurs bei:
-  - [Deutsches Rotes Kreuz (DRK)](https://www.drk.de)
-  - [Johanniter-Unfall-Hilfe](https://www.johanniter.de)
-  - [Malteser Hilfsdienst](https://www.malteser.de)
-  - [Arbeiter-Samariter-Bund (ASB)](https://www.asb.de)
-
-✓ Frischen Sie Ihre Kenntnisse alle 2 Jahre auf
-
-✓ Üben Sie CPR regelmäßig (z.B. mit dieser App + Übungspuppe)
-
-### 9.2 Sichere Nutzung
-
-**Für optimale und sichere Nutzung:**
-
-1. ✓ Lesen Sie die komplette Dokumentation
-2. ✓ Üben Sie zuerst mit einer CPR-Übungspuppe
-3. ✓ Verstehen Sie die Limitierungen der App
-4. ✓ Haben Sie immer Ihr Telefon griffbereit (Notruf!)
-5. ✓ Verlassen Sie sich nie ausschließlich auf die App
+If any provision of this disclaimer is invalid, the remaining provisions remain unaffected.
 
 ---
 
-## 10. Kontakt bei Fragen
+## 9. Recommendations
 
-Bei Fragen zu diesem Haftungsausschluss:
+### 9.1 First Aid Training
 
-- 📧 Email: [Ihre Email]
-- 🐛 GitHub Issues: [Ihr GitHub Repo]
-- 💬 Discussions: [Ihr GitHub Discussions]
+**We strongly recommend:**
 
-**Wichtig:** Dies ist **KEIN** medizinischer Support! Bei medizinischen Notfällen wählen Sie **112** (Europa) oder **911** (USA).
+✓ Take an official first aid course with:
+  - [American Red Cross](https://www.redcross.org/take-a-class)
+  - [St. John Ambulance](https://www.sja.org.uk/)
+  - Local emergency services
+  - Accredited training organizations
+
+✓ Refresh your skills every 2 years
+
+✓ Practice CPR regularly (e.g., with this app + practice dummy)
+
+### 9.2 Safe Use
+
+**For optimal and safe use:**
+
+1. ✓ Read the complete documentation
+2. ✓ Practice first with a CPR practice dummy
+3. ✓ Understand the app's limitations
+4. ✓ Always have your phone ready (emergency call!)
+5. ✓ Never rely exclusively on the app
 
 ---
 
-## 11. Zustimmung
+## 10. Contact for Questions
 
-**DURCH DIE INSTALLATION, AKTIVIERUNG ODER NUTZUNG DIESER APP BESTÄTIGEN SIE:**
+For questions about this disclaimer:
 
-☑️ Ich habe diesen Haftungsausschluss vollständig gelesen und verstanden
-☑️ Ich akzeptiere alle hier genannten Bedingungen und Einschränkungen
-☑️ Ich verstehe, dass ich die App auf eigenes Risiko nutze
-☑️ Ich verstehe, dass die App keine medizinische Ausbildung ersetzt
-☑️ Ich werde im Notfall IMMER ZUERST den Notruf (112/911) wählen
-☑️ Ich übernehme die volle Verantwortung für meine Handlungen
+- 📧 Email: [Your Email]
+- 🐛 GitHub Issues: [Your GitHub Repo]
+- 💬 Discussions: [Your GitHub Discussions]
+
+**Important:** This is **NOT** medical support! For medical emergencies, call **911** (USA) or **112** (Europe).
+
+---
+
+## 11. Consent
+
+**BY INSTALLING, ACTIVATING, OR USING THIS APP, YOU CONFIRM:**
+
+☑️ I have read and understood this disclaimer completely
+☑️ I accept all conditions and limitations stated here
+☑️ I understand that I use the app at my own risk
+☑️ I understand that the app does not replace medical training
+☑️ I will ALWAYS call emergency services FIRST (911/112) in an emergency
+☑️ I assume full responsibility for my actions
 
 ---
 
 **Version:** 1.0.0
-**Datum:** Februar 2026
-**Status:** Gültig
+**Date:** February 2026
+**Status:** Valid
 
 ---
 
 <div align="center">
 
-**Im Zweifelsfall: Lieber helfen als nicht helfen!**
-*Aber immer zuerst den Notruf wählen.*
+**When in doubt: Better to help than not to help!**
+*But always call emergency services first.*
 
-**Leben retten lernen - verantwortungsvoll.**
+**Learn to save lives - responsibly.**
 
 </div>

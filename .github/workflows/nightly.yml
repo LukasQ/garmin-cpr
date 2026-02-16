@@ -18,7 +18,7 @@ jobs:
         ref: main
 
     - name: Cache SDK
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/connectiq-sdk
         key: ${{ runner.os }}-connectiq-sdk-7.2.1
@@ -78,7 +78,7 @@ jobs:
 
     - name: Upload logs
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: nightly-build-logs
         path: logs/

@@ -1,0 +1,48 @@
+name: Check Action Versions
+
+on:
+  schedule:
+    # Run monthly to check for updates
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  check-versions:
+    name: Check for Action Updates
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check actions versions
+      run: |
+        echo "Checking GitHub Actions versions in workflows..."
+        echo "Current versions used:"
+        echo ""
+
+        grep -h "uses:" .github/workflows/*.yml | sort -u
+
+        echo ""
+        echo "Latest stable versions (as of February 2026):"
+        echo "- actions/checkout@v4"
+        echo "- actions/cache@v4"
+        echo "- actions/upload-artifact@v4"
+        echo "- softprops/action-gh-release@v2"
+        echo ""
+        echo "Check https://github.com/actions for latest versions"
+
+    - name: Create summary
+      run: |
+        echo "# Action Versions Check" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Current Versions" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        grep -h "uses:" .github/workflows/*.yml | grep -v "^#" | sort -u >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Recommended Versions" >> $GITHUB_STEP_SUMMARY
+        echo "- \`actions/checkout@v4\`" >> $GITHUB_STEP_SUMMARY
+        echo "- \`actions/cache@v4\`" >> $GITHUB_STEP_SUMMARY
+        echo "- \`actions/upload-artifact@v4\`" >> $GITHUB_STEP_SUMMARY
+        echo "- \`softprops/action-gh-release@v2\`" >> $GITHUB_STEP_SUMMARY

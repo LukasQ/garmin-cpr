@@ -1,7 +1,7 @@
 using Toybox.WatchUi;
 
 /**
- * CPRTrainerDelegate - Behandelt Benutzereingaben
+ * CPRTrainerDelegate - Handles user input
  */
 class CPRTrainerDelegate extends WatchUi.BehaviorDelegate {
 

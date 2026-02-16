@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:www.erc.edu)",
       "Bash(pip3 list:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(wc:*)"
     ]
   }
 }
