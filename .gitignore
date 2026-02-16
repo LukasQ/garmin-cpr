@@ -11,6 +11,7 @@ developer_key.pem
 .vscode/
 .idea/
 *.iml
+.claude/
 
 # OS specific files
 .DS_Store
