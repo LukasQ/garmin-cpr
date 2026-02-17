@@ -46,13 +46,11 @@ jobs:
         echo "$HOME/connectiq-sdk/bin" >> $GITHUB_PATH
         export PATH="$HOME/connectiq-sdk/bin:$PATH"
 
-    - name: Generate developer key
+    - name: Decode developer key
       run: |
-        echo "Generating developer key..."
-        openssl genrsa -out developer_key.pem 4096 2>/dev/null
-        openssl pkcs8 -topk8 -inform PEM -outform DER \
-          -in developer_key.pem -out developer_key.der -nocrypt
-        echo "Developer key generated"
+        echo "Decoding developer key from secrets..."
+        echo "${{ secrets.DEVELOPER_KEY_DER }}" | base64 -d > developer_key.der
+        echo "Developer key ready"
 
     - name: Verify project structure
       run: |

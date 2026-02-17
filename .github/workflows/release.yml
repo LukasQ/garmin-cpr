@@ -42,11 +42,9 @@ jobs:
         rm sdk.zip
         chmod +x bin/monkeyc bin/monkeydo
 
-    - name: Generate developer key
+    - name: Decode developer key
       run: |
-        openssl genrsa -out developer_key.pem 4096 2>/dev/null
-        openssl pkcs8 -topk8 -inform PEM -outform DER \
-          -in developer_key.pem -out developer_key.der -nocrypt
+        echo "${{ secrets.DEVELOPER_KEY_DER }}" | base64 -d > developer_key.der
 
     - name: Create bin directory
       run: mkdir -p bin release

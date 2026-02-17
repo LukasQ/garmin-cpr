@@ -6,6 +6,7 @@ bin/
 # Developer keys (keep these private!)
 developer_key.der
 developer_key.pem
+developer_key.der.b64
 
 # IDE specific files
 .vscode/
