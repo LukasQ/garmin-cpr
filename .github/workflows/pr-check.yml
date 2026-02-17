@@ -190,7 +190,7 @@ jobs:
       run: |
         mkdir -p ~/connectiq-sdk
         cd ~/connectiq-sdk
-        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1.zip -O sdk.zip
+        wget -q https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -O sdk.zip
         unzip -q sdk.zip
         rm sdk.zip
         chmod +x bin/monkeyc
