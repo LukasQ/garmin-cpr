@@ -151,12 +151,9 @@ jobs:
         - 💙 Beatmungs-Erinnerung
 
         ### 📱 Unterstützte Geräte
-        - Fenix Serie (5, 6, 7)
-        - Venu Serie (1, 2, 2 Plus, 2S)
-        - Forerunner Serie (245, 255, 945, 955)
-        - Vivoactive Serie (3, 4, 4S)
-        - Epix 2
-        - Marq Serie
+        - Fenix Serie (7, 7S, 7X)
+        - Venu Serie (2, 2 Plus)
+        - Forerunner Serie (955)
 
         ### 📖 Dokumentation
         - [Installation Guide](https://github.com/[your-username]/garmin-cpr/blob/main/INSTALLATION.md)

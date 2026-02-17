@@ -59,6 +59,7 @@ jobs:
         test -f manifest.xml || (echo "manifest.xml not found!" && exit 1)
         test -f monkey.jungle || (echo "monkey.jungle not found!" && exit 1)
         test -d source || (echo "source directory not found!" && exit 1)
+        test -f resources/drawables/launcher_icon.png || (echo "launcher_icon.png not found!" && exit 1)
         echo "Project structure OK"
 
     - name: Build universal .iq package
@@ -167,7 +168,7 @@ jobs:
       run: |
         echo "Checking for broken internal links..."
         # Check if linked files exist
-        for file in INSTALLATION.md PUBLISHING.md DISCLAIMER.md DEPTH_SENSOR.md ICON_GUIDE.md REFERENCES.bib; do
+        for file in INSTALLATION.md PUBLISHING.md DISCLAIMER.md DEPTH_SENSOR.md ICON_SPECS.md REFERENCES.bib CI_CD_GUIDE.md DEPENDENCIES.md; do
           if grep -q "$file" README.md; then
             test -f "$file" && echo "✅ $file exists" || (echo "❌ $file referenced but not found!" && exit 1)
           fi
