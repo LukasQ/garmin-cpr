@@ -63,37 +63,15 @@ jobs:
         test -d source || (echo "source directory not found!" && exit 1)
         echo "Project structure OK"
 
-    - name: Build for Fenix 7
+    - name: Build universal .iq package
       run: |
-        echo "Building for Fenix 7..."
+        echo "Building universal .iq package for all devices..."
         mkdir -p bin
         ~/connectiq-sdk/bin/monkeyc \
-          -o bin/CPRTrainer-fenix7.prg \
+          -o bin/CPRTrainer.iq \
           -f monkey.jungle \
           -y developer_key.der \
-          -d fenix7 \
-          -w
-        echo "Build successful!"
-
-    - name: Build for Venu 2
-      run: |
-        echo "Building for Venu 2..."
-        ~/connectiq-sdk/bin/monkeyc \
-          -o bin/CPRTrainer-venu2.prg \
-          -f monkey.jungle \
-          -y developer_key.der \
-          -d venu2 \
-          -w
-        echo "Build successful!"
-
-    - name: Build for Forerunner 955
-      run: |
-        echo "Building for Forerunner 955..."
-        ~/connectiq-sdk/bin/monkeyc \
-          -o bin/CPRTrainer-fr955.prg \
-          -f monkey.jungle \
-          -y developer_key.der \
-          -d forerunner955 \
+          -r \
           -w
         echo "Build successful!"
 
@@ -105,22 +83,21 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: cpr-trainer-builds
-        path: bin/*.prg
+        name: cpr-trainer-build
+        path: bin/*.iq
         retention-days: 30
 
     - name: Build summary
       run: |
         echo "### Build Summary :rocket:" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "✅ **Build successful for all devices!**" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **Build successful!**" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "Built for:" >> $GITHUB_STEP_SUMMARY
-        echo "- Fenix 7" >> $GITHUB_STEP_SUMMARY
-        echo "- Venu 2" >> $GITHUB_STEP_SUMMARY
-        echo "- Forerunner 955" >> $GITHUB_STEP_SUMMARY
+        echo "**Package:** CPRTrainer.iq (universal package for all devices)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "Artifacts available for download in the Actions tab." >> $GITHUB_STEP_SUMMARY
+        echo "**Supported devices:** See manifest.xml for complete list" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Artifact available for download in the Actions tab." >> $GITHUB_STEP_SUMMARY
 
   lint:
     name: Code Quality Checks

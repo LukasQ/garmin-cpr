@@ -51,40 +51,12 @@ jobs:
     - name: Create bin directory
       run: mkdir -p bin release
 
-    - name: Build for all devices
+    - name: Build universal package
       run: |
-        echo "Building release for all supported devices..."
-
-        DEVICES=(
-          "fenix7:Fenix7"
-          "fenix7s:Fenix7S"
-          "fenix7x:Fenix7X"
-          "fenix6:Fenix6"
-          "fenix6s:Fenix6S"
-          "fenix6xpro:Fenix6XPro"
-          "venu:Venu"
-          "venu2:Venu2"
-          "venu2plus:Venu2Plus"
-          "venu2s:Venu2S"
-          "vivoactive4:Vivoactive4"
-          "vivoactive4s:Vivoactive4S"
-          "forerunner245:FR245"
-          "forerunner255:FR255"
-          "forerunner945:FR945"
-          "forerunner955:FR955"
-          "epix2:Epix2"
-        )
-
-        for device_pair in "${DEVICES[@]}"; do
-          IFS=':' read -r device_id device_name <<< "$device_pair"
-          echo "Building for $device_name ($device_id)..."
-          ~/connectiq-sdk/bin/monkeyc \
-            -o "bin/CPRTrainer-${device_name}.prg" \
-            -f monkey.jungle \
-            -y developer_key.der \
-            -d "$device_id" \
-            -w || echo "⚠️ Build failed for $device_name, skipping..."
-        done
+        echo "Building universal .iq package for all supported devices..."
+        echo "Note: Individual .prg builds require device files from SDK Manager"
+        echo "The universal .iq package works for all devices in manifest.xml"
+        mkdir -p bin
 
     - name: Build universal .iq package for store
       run: |
@@ -97,12 +69,10 @@ jobs:
           -w
         echo "✅ Universal .iq package created"
 
-    - name: Create ZIP of all PRG files
+    - name: Copy .iq to release folder
       run: |
-        cd bin
-        zip -r "../release/CPRTrainer-AllDevices-v${{ steps.version.outputs.version }}.zip" *.prg
-        cd ..
-        echo "✅ ZIP package created"
+        cp bin/CPRTrainer-v${{ steps.version.outputs.version }}.iq release/
+        echo "✅ Release package ready"
 
     - name: Generate build info
       run: |
@@ -121,18 +91,18 @@ jobs:
 
         Installation:
         -------------
-        1. Download the .prg file for your specific device
-        2. Connect your Garmin watch via USB
-        3. Copy the .prg file to GARMIN/GARMIN/APPS/
-        4. Disconnect and restart your watch
+        1. Download CPRTrainer-v${{ steps.version.outputs.version }}.iq
+        2. Install via Garmin Express (recommended) or Connect IQ mobile app
+        3. Or sideload: Copy .iq file to watch and open with file manager
 
         For publishing to Connect IQ Store:
         -----------------------------------
-        Use the .iq file: CPRTrainer-v${{ steps.version.outputs.version }}.iq
+        Upload the .iq file: CPRTrainer-v${{ steps.version.outputs.version }}.iq
 
         Supported Devices:
         ------------------
-        $(find bin -name "*.prg" -exec basename {} \; | sed 's/CPRTrainer-//g' | sed 's/.prg//g' | sort)
+        See manifest.xml for the complete list of supported devices.
+        The universal .iq package works on all devices listed in the manifest.
 
         Documentation:
         --------------
@@ -165,12 +135,13 @@ jobs:
 
         ### 📦 Downloads
 
-        **Für Endnutzer:**
-        - `CPRTrainer-AllDevices-vX.X.X.zip` - Alle .prg Dateien für direkte Installation
-        - Wähle die .prg Datei für dein Gerät und kopiere sie nach `GARMIN/GARMIN/APPS/`
+        **Universal Package (works for all devices):**
+        - `CPRTrainer-vX.X.X.iq` - Install via Garmin Express or Connect IQ Store
 
-        **Für Connect IQ Store:**
-        - `CPRTrainer-vX.X.X.iq` - Universal package für Store-Submission
+        **Installation:**
+        1. Download the .iq file
+        2. Install via Garmin Express (recommended) or Connect IQ mobile app
+        3. Or copy to your device and install from there
 
         ### ✨ Features
         - 🎵 110 BPM Rhythmus (ERC Guidelines 2025)

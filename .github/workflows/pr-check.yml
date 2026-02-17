@@ -205,9 +205,9 @@ jobs:
       run: |
         mkdir -p bin
         ~/connectiq-sdk/bin/monkeyc \
-          -o bin/test.prg \
+          -o bin/test.iq \
           -f monkey.jungle \
           -y developer_key.der \
-          -d fenix7 \
+          -r \
           -w
         echo "✅ Build test successful!"

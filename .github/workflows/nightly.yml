@@ -38,43 +38,27 @@ jobs:
         openssl pkcs8 -topk8 -inform PEM -outform DER \
           -in developer_key.pem -out developer_key.der -nocrypt
 
-    - name: Build for all devices
+    - name: Build universal package
       continue-on-error: true
       run: |
         mkdir -p bin logs
 
-        DEVICES=(
-          fenix7 fenix7s fenix7x
-          fenix6 fenix6s fenix6xpro
-          fenix5 fenix5s fenix5x
-          venu venu2 venu2plus venu2s
-          vivoactive3 vivoactive4 vivoactive4s
-          forerunner245 forerunner255 forerunner945 forerunner955
-          epix2 marq
-        )
-
-        SUCCESS=0
-        FAILED=0
-
-        for device in "${DEVICES[@]}"; do
-          echo "Building for $device..."
-          if ~/connectiq-sdk/bin/monkeyc \
-            -o "bin/CPRTrainer-${device}.prg" \
-            -f monkey.jungle \
-            -y developer_key.der \
-            -d "$device" \
-            -w > "logs/${device}.log" 2>&1; then
-            echo "✅ $device: SUCCESS"
-            SUCCESS=$((SUCCESS + 1))
-          else
-            echo "❌ $device: FAILED"
-            FAILED=$((FAILED + 1))
-            cat "logs/${device}.log"
-          fi
-        done
-
-        echo "SUCCESS_COUNT=$SUCCESS" >> $GITHUB_ENV
-        echo "FAILED_COUNT=$FAILED" >> $GITHUB_ENV
+        echo "Building universal .iq package for all devices in manifest..."
+        if ~/connectiq-sdk/bin/monkeyc \
+          -o "bin/CPRTrainer.iq" \
+          -f monkey.jungle \
+          -y developer_key.der \
+          -r \
+          -w > "logs/build.log" 2>&1; then
+          echo "✅ Build SUCCESS"
+          echo "SUCCESS_COUNT=1" >> $GITHUB_ENV
+          echo "FAILED_COUNT=0" >> $GITHUB_ENV
+        else
+          echo "❌ Build FAILED"
+          cat "logs/build.log"
+          echo "SUCCESS_COUNT=0" >> $GITHUB_ENV
+          echo "FAILED_COUNT=1" >> $GITHUB_ENV
+        fi
 
     - name: Upload logs
       if: always()
@@ -91,14 +75,14 @@ jobs:
         echo "**Date:** $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "## Results" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Successful builds: ${{ env.SUCCESS_COUNT }}" >> $GITHUB_STEP_SUMMARY
-        echo "- ❌ Failed builds: ${{ env.FAILED_COUNT }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Build status: $([ "${{ env.SUCCESS_COUNT }}" -eq 1 ] && echo "✅ Success" || echo "❌ Failed")" >> $GITHUB_STEP_SUMMARY
+        echo "- Package: CPRTrainer.iq (universal for all manifest devices)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
         if [ "${{ env.FAILED_COUNT }}" -gt 0 ]; then
-          echo "⚠️ Some builds failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
+          echo "⚠️ Build failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
         else
-          echo "✅ All builds successful!" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Build successful for all devices in manifest!" >> $GITHUB_STEP_SUMMARY
         fi
 
     - name: Notify on failure
